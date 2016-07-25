@@ -1,6 +1,6 @@
 {
   "generator-jhipster": {
-    "jhipsterVersion": "3.4.2",
+    "jhipsterVersion": "3.5.1",
     "baseName": "smurfHouse",
     "packageName": "com.smurfhouse",
     "packageFolder": "com/smurfhouse",

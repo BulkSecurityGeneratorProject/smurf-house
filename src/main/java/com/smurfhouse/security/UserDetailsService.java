@@ -1,4 +1,5 @@
 package com.smurfhouse.security;
+
 import com.smurfhouse.domain.User;
 import com.smurfhouse.repository.UserRepository;
 import org.slf4j.Logger;
