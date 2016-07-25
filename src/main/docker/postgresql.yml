@@ -1,0 +1,12 @@
+version: '2'
+services:
+    smurfhouse-postgresql:
+        container_name: smurfhouse-postgresql
+        image: postgres:9.5.2
+        # volumes:
+        #     - ~/volumes/jhipster/smurfHouse/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=smurfHouse
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
