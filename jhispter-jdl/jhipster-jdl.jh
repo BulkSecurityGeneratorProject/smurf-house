@@ -1,0 +1,41 @@
+enum Provider {
+    IDEALISTA
+}
+
+entity GroupSearch {
+	title String required maxlength(256),
+    url String required maxlength(2048),
+    provider Provider,
+    maxLimitPrice BigDecimal required,
+    activated Boolean
+}
+
+entity House {
+	key String required maxlength(2048),
+    externalLink String required maxlength(2048),
+    price BigDecimal,
+    startDate LocalDate,
+    endDate LocalDate,
+	meters Integer,
+    numrooms Integer,
+	floor String,
+    details String maxlength(4096),
+    elevator Boolean,
+    facingOutside Boolean,
+    garage Boolean,
+}
+
+
+entity PriceHouse {
+    price BigDecimal required,
+    whenChanged LocalDate required
+}
+
+relationship OneToMany {
+  GroupSearch{house} to House{groupSearch}
+}
+
+relationship OneToMany {
+  House{priceHouse} to PriceHouse{house}
+}
+paginate GroupSearch, House, PriceHouse with pagination

@@ -1,0 +1,85 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "priceHouse",
+      "otherEntityName": "priceHouse",
+      "otherEntityRelationshipName": "house"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "groupSearch",
+      "otherEntityName": "groupSearch",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "key",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 2048
+    },
+    {
+      "fieldName": "externalLink",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 2048
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "meters",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "numrooms",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "floor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 4096
+    },
+    {
+      "fieldName": "elevator",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "facingOutside",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "garage",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20160728184718",
+  "entityTableName": "house",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no"
+}

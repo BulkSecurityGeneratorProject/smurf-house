@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity PriceHouse.
+    -->
+    <changeSet id="20160728184719-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="house_id"
+                                 baseTableName="price_house"
+                                 constraintName="fk_pricehouse_house_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="house"/>
+
+    </changeSet>
+</databaseChangeLog>

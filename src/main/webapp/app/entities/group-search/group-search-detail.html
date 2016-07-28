@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span translate="smurfHouseApp.groupSearch.detail.title">Group Search</span> {{vm.groupSearch.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="smurfHouseApp.groupSearch.title">Title</span></dt>
+        <dd>
+            <span>{{vm.groupSearch.title}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.groupSearch.url">Url</span></dt>
+        <dd>
+            <span>{{vm.groupSearch.url}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.groupSearch.provider">Provider</span></dt>
+        <dd>
+            <span translate="{{'smurfHouseApp.Provider.' + vm.groupSearch.provider}}">{{vm.groupSearch.provider}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.groupSearch.maxLimitPrice">Max Limit Price</span></dt>
+        <dd>
+            <span>{{vm.groupSearch.maxLimitPrice}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.groupSearch.activated">Activated</span></dt>
+        <dd>
+            <span>{{vm.groupSearch.activated}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="group-search-detail.edit({id:vm.groupSearch.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

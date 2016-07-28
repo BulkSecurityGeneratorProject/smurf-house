@@ -1,0 +1,138 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myHouseLabel" translate="smurfHouseApp.house.home.createOrEditLabel">Create or edit a House</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.house.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.house.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.key" for="field_key">Key</label>
+            <input type="text" class="form-control" name="key" id="field_key"
+                    ng-model="vm.house.key"
+                    required ng-maxlength="2048" />
+            <div ng-show="editForm.key.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.key.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.key.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="2048">
+                    This field cannot be longer than 2048 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.externalLink" for="field_externalLink">External Link</label>
+            <input type="text" class="form-control" name="externalLink" id="field_externalLink"
+                    ng-model="vm.house.externalLink"
+                    required ng-maxlength="2048" />
+            <div ng-show="editForm.externalLink.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.externalLink.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.externalLink.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="2048">
+                    This field cannot be longer than 2048 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.price" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                    ng-model="vm.house.price"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.startDate" for="field_startDate">Start Date</label>
+                <div class="input-group">
+                    <input id="field_startDate" type="text" class="form-control" name="startDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.house.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.endDate" for="field_endDate">End Date</label>
+                <div class="input-group">
+                    <input id="field_endDate" type="text" class="form-control" name="endDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.house.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.meters" for="field_meters">Meters</label>
+            <input type="number" class="form-control" name="meters" id="field_meters"
+                    ng-model="vm.house.meters"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.numrooms" for="field_numrooms">Numrooms</label>
+            <input type="number" class="form-control" name="numrooms" id="field_numrooms"
+                    ng-model="vm.house.numrooms"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.floor" for="field_floor">Floor</label>
+            <input type="text" class="form-control" name="floor" id="field_floor"
+                    ng-model="vm.house.floor"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.details" for="field_details">Details</label>
+            <input type="text" class="form-control" name="details" id="field_details"
+                    ng-model="vm.house.details"
+                    ng-maxlength="4096" />
+            <div ng-show="editForm.details.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.details.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="4096">
+                    This field cannot be longer than 4096 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.elevator" for="field_elevator">Elevator</label>
+            <input type="checkbox" class="form-control" name="elevator" id="field_elevator"
+                    ng-model="vm.house.elevator"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.facingOutside" for="field_facingOutside">Facing Outside</label>
+            <input type="checkbox" class="form-control" name="facingOutside" id="field_facingOutside"
+                    ng-model="vm.house.facingOutside"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.house.garage" for="field_garage">Garage</label>
+            <input type="checkbox" class="form-control" name="garage" id="field_garage"
+                    ng-model="vm.house.garage"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smurfHouseApp.house.groupSearch" for="field_groupSearch">Group Search</label>
+            <select class="form-control" id="field_groupSearch" name="groupSearch" ng-model="vm.house.groupSearch" ng-options="groupSearch as groupSearch.id for groupSearch in vm.groupsearches track by groupSearch.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

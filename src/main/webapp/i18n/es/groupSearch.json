@@ -1,0 +1,27 @@
+{
+    "smurfHouseApp": {
+        "groupSearch" : {
+            "home": {
+                "title": "Group Searches",
+                "createLabel": "Crear nuevo Group Search",
+                "createOrEditLabel": "Crear o editar Group Search",
+                "search": "Search for Group Search"
+            },
+            "created": "Un nuevo Group Search ha sido creado con el identificador {{ param }}",
+            "updated": "Un Group Search ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Group Search ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Group Search {{ id }}?"
+            },
+            "detail": {
+                "title": "Group Search"
+            },
+            "title": "Title",
+            "url": "Url",
+            "provider": "Provider",
+            "maxLimitPrice": "Max Limit Price",
+            "activated": "Activated",
+            "house": "House"
+        }
+    }
+}

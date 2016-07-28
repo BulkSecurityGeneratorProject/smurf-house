@@ -1,0 +1,51 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "house",
+      "otherEntityName": "house",
+      "otherEntityRelationshipName": "groupSearch"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 256
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": 2048
+    },
+    {
+      "fieldName": "provider",
+      "fieldType": "Provider",
+      "fieldValues": "IDEALISTA"
+    },
+    {
+      "fieldName": "maxLimitPrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20160728184717",
+  "entityTableName": "group_search",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no"
+}

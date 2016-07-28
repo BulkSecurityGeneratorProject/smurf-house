@@ -1,0 +1,24 @@
+{
+    "smurfHouseApp": {
+        "priceHouse" : {
+            "home": {
+                "title": "Price Houses",
+                "createLabel": "Create a new Price House",
+                "createOrEditLabel": "Create or edit a Price House",
+                "search": "Search for Price House"
+            },
+            "created": "A new Price House is created with identifier {{ param }}",
+            "updated": "A Price House is updated with identifier {{ param }}",
+            "deleted": "A Price House is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Price House {{ id }}?"
+            },
+            "detail": {
+                "title": "Price House"
+            },
+            "price": "Price",
+            "whenChanged": "When Changed",
+            "house": "House"
+        }
+    }
+}

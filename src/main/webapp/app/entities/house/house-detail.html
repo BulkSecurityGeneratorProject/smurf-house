@@ -1,0 +1,71 @@
+
+<div>
+    <h2><span translate="smurfHouseApp.house.detail.title">House</span> {{vm.house.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="smurfHouseApp.house.key">Key</span></dt>
+        <dd>
+            <span>{{vm.house.key}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.externalLink">External Link</span></dt>
+        <dd>
+            <span>{{vm.house.externalLink}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.price">Price</span></dt>
+        <dd>
+            <span>{{vm.house.price}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.house.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.house.endDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.meters">Meters</span></dt>
+        <dd>
+            <span>{{vm.house.meters}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.numrooms">Numrooms</span></dt>
+        <dd>
+            <span>{{vm.house.numrooms}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.floor">Floor</span></dt>
+        <dd>
+            <span>{{vm.house.floor}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.details">Details</span></dt>
+        <dd>
+            <span>{{vm.house.details}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.elevator">Elevator</span></dt>
+        <dd>
+            <span>{{vm.house.elevator}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.facingOutside">Facing Outside</span></dt>
+        <dd>
+            <span>{{vm.house.facingOutside}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.garage">Garage</span></dt>
+        <dd>
+            <span>{{vm.house.garage}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.house.groupSearch">Group Search</span></dt>
+        <dd>
+            <a ui-sref="group-search-detail({id:vm.house.groupSearch.id})">{{vm.house.groupSearch.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="house-detail.edit({id:vm.house.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

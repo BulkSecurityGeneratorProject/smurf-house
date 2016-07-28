@@ -1,0 +1,31 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "house",
+      "otherEntityName": "house",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "whenChanged",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "changelogDate": "20160728184719",
+  "entityTableName": "price_house",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no"
+}

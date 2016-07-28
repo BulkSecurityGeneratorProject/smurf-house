@@ -1,0 +1,35 @@
+{
+    "smurfHouseApp": {
+        "house" : {
+            "home": {
+                "title": "Houses",
+                "createLabel": "Crear nuevo House",
+                "createOrEditLabel": "Crear o editar House",
+                "search": "Search for House"
+            },
+            "created": "Un nuevo House ha sido creado con el identificador {{ param }}",
+            "updated": "Un House ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un House ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar House {{ id }}?"
+            },
+            "detail": {
+                "title": "House"
+            },
+            "key": "Key",
+            "externalLink": "External Link",
+            "price": "Price",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "meters": "Meters",
+            "numrooms": "Numrooms",
+            "floor": "Floor",
+            "details": "Details",
+            "elevator": "Elevator",
+            "facingOutside": "Facing Outside",
+            "garage": "Garage",
+            "priceHouse": "Price House",
+            "groupSearch": "Group Search"
+        }
+    }
+}
