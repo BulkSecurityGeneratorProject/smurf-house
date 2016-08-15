@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.smurfhouse.domain.GroupSearch;
 import com.smurfhouse.repository.GroupSearchRepository;
 import com.smurfhouse.repository.search.GroupSearchSearchRepository;
+import com.smurfhouse.service.ScratchService;
+import com.smurfhouse.web.rest.dto.StatsSincronyzeDTO;
 import com.smurfhouse.web.rest.util.HeaderUtil;
 import com.smurfhouse.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -22,10 +24,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing GroupSearch.
@@ -35,13 +35,40 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class GroupSearchResource {
 
     private final Logger log = LoggerFactory.getLogger(GroupSearchResource.class);
-        
+
     @Inject
     private GroupSearchRepository groupSearchRepository;
-    
+
     @Inject
     private GroupSearchSearchRepository groupSearchSearchRepository;
-    
+
+    @Inject
+    private ScratchService scratchService;
+
+    /**
+     * POST /group-searches/{id}/sync -> Updates an existing episode.
+     * 	param:  id
+     */
+    @RequestMapping(value = "/group-searches/{id}/sync",
+        method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<StatsSincronyzeDTO> sync(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to sync for groupSearch {} " , id );
+
+        GroupSearch groupSearch = groupSearchRepository.findOne(id);
+        return Optional.ofNullable(groupSearch)
+            .map(result -> new ResponseEntity<>(
+                scratchService.synchronizeByGroupSearch(id),
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+        /*
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createAlert("Updated -  " + stats.toString(), "groupSearch"))
+            .body(stats);
+            */
+    }
+
     /**
      * POST  /group-searches : Create a new groupSearch.
      *
@@ -104,7 +131,7 @@ public class GroupSearchResource {
     public ResponseEntity<List<GroupSearch>> getAllGroupSearches(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of GroupSearches");
-        Page<GroupSearch> page = groupSearchRepository.findAll(pageable); 
+        Page<GroupSearch> page = groupSearchRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/group-searches");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

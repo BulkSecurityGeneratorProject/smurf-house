@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="fmunozse (generated)" id="1470769834193-1">
+      <addColumn tableName="group_search">
+         <column name="created_by" type="varchar(50)">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-2">
+      <addColumn tableName="house">
+         <column name="created_by" type="varchar(50)">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-3">
+      <addColumn tableName="price_house">
+         <column name="created_by" type="varchar(50)">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-4">
+      <addColumn tableName="group_search">
+         <column name="created_date" type="timestamp">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-5">
+      <addColumn tableName="house">
+         <column name="created_date" type="timestamp">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-6">
+      <addColumn tableName="price_house">
+         <column name="created_date" type="timestamp">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-7">
+      <addColumn tableName="group_search">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-8">
+      <addColumn tableName="house">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-9">
+      <addColumn tableName="price_house">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-10">
+      <addColumn tableName="group_search">
+         <column name="last_modified_date" type="timestamp"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-11">
+      <addColumn tableName="house">
+         <column name="last_modified_date" type="timestamp"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="fmunozse (generated)" id="1470769834193-12">
+      <addColumn tableName="price_house">
+         <column name="last_modified_date" type="timestamp"/>
+      </addColumn>
+   </changeSet>
+</databaseChangeLog>

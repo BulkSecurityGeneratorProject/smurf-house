@@ -32,6 +32,11 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
 
+    <button type="button" ng-click="vm.refreshSync(vm.groupSearch.id)"  class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.resync">Refresh Sync</span>
+    </button>
+
     <button type="button" ui-sref="group-search-detail.edit({id:vm.groupSearch.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>

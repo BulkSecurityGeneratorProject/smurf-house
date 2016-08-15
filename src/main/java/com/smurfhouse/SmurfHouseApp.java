@@ -4,6 +4,7 @@ import com.smurfhouse.config.Constants;
 import com.smurfhouse.config.DefaultProfileUtil;
 import com.smurfhouse.config.JHipsterProperties;
 
+import com.smurfhouse.service.ScratchService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +32,9 @@ public class SmurfHouseApp {
     @Inject
     private Environment env;
 
+    @Inject
+    private ScratchService scratchService;
+
     /**
      * Initializes smurfHouse.
      * <p>
@@ -50,6 +54,8 @@ public class SmurfHouseApp {
             log.error("You have misconfigured your application! It should not" +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
+
+        //scratchService.synchronize();
     }
 
     /**

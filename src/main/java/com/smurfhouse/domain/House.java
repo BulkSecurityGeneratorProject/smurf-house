@@ -21,7 +21,7 @@ import java.util.Objects;
 @Table(name = "house")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "house")
-public class House implements Serializable {
+public class House extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,8 +31,14 @@ public class House implements Serializable {
 
     @NotNull
     @Size(max = 2048)
+    @Column(name = "title", length = 2048, nullable = false)
+    private String title;
+
+    @NotNull
+    @Size(max = 2048)
     @Column(name = "key", length = 2048, nullable = false)
     private String key;
+
 
     @NotNull
     @Size(max = 2048)
@@ -222,6 +228,7 @@ public class House implements Serializable {
     public String toString() {
         return "House{" +
             "id=" + id +
+            ", title='" + title + "'" +
             ", key='" + key + "'" +
             ", externalLink='" + externalLink + "'" +
             ", price='" + price + "'" +
@@ -235,5 +242,13 @@ public class House implements Serializable {
             ", facingOutside='" + facingOutside + "'" +
             ", garage='" + garage + "'" +
             '}';
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -36,18 +36,11 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="key"><span translate="smurfHouseApp.house.key">Key</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="externalLink"><span translate="smurfHouseApp.house.externalLink">External Link</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span translate="smurfHouseApp.house.title">Key</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="details"><span translate="smurfHouseApp.house.details">Details</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="price"><span translate="smurfHouseApp.house.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="startDate"><span translate="smurfHouseApp.house.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="endDate"><span translate="smurfHouseApp.house.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meters"><span translate="smurfHouseApp.house.meters">Meters</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="numrooms"><span translate="smurfHouseApp.house.numrooms">Numrooms</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="floor"><span translate="smurfHouseApp.house.floor">Floor</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="details"><span translate="smurfHouseApp.house.details">Details</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="elevator"><span translate="smurfHouseApp.house.elevator">Elevator</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="facingOutside"><span translate="smurfHouseApp.house.facingOutside">Facing Outside</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="garage"><span translate="smurfHouseApp.house.garage">Garage</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="groupSearch.id"><span translate="smurfHouseApp.house.groupSearch">Group Search</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -55,20 +48,13 @@
             <tbody>
                 <tr ng-repeat="house in vm.houses track by house.id">
                     <td><a ui-sref="house-detail({id:house.id})">{{house.id}}</a></td>
-                    <td>{{house.key}}</td>
-                    <td>{{house.externalLink}}</td>
-                    <td>{{house.price}}</td>
-                        <td>{{house.startDate | date:'mediumDate'}}</td>
-                        <td>{{house.endDate | date:'mediumDate'}}</td>
-                    <td>{{house.meters}}</td>
-                    <td>{{house.numrooms}}</td>
-                    <td>{{house.floor}}</td>
+                    <td>{{house.title}}</td>
                     <td>{{house.details}}</td>
-                    <td>{{house.elevator}}</td>
-                    <td>{{house.facingOutside}}</td>
-                    <td>{{house.garage}}</td>
+                    <td>{{house.price | currency:"€":0}}</td>
+                    <td>{{house.startDate | date:'mediumDate'}}</td>
+                    <td>{{house.endDate | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="group-search-detail({id:house.groupSearch.id})">{{house.groupSearch.id}}</a>
+                        <a ui-sref="group-search-detail({id:house.groupSearch.id})">{{house.groupSearch.title}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

@@ -12,4 +12,11 @@
     <include file="classpath:config/liquibase/changelog/20160728184718_added_entity_constraints_House.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160728184719_added_entity_constraints_PriceHouse.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+
+    <include file="classpath:config/liquibase/changelog/20160803202230_added_title_to_house.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160809191017_added_audits_fields.xml" relativeToChangelogFile="false"/>
+
+
+    <include file="classpath:config/liquibase/changelog/99999999999999_uploadstatic_data.xml" relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

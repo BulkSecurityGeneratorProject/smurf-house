@@ -91,7 +91,8 @@
             "edit": "Editar",
             "open": "Open",
             "save": "Guardar",
-            "view": "Vista"
+            "view": "Vista",
+            "resync": "Refresco Sincronización"
         },
         "detail": {
             "field": "Campo",

@@ -20,7 +20,17 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'sync' : {
+                method: 'POST',
+                url:'api/group-searches/:id/sync',
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.fromJson(data);
+                    }
+                    return data;
+                }
+            }
         });
     }
 })();

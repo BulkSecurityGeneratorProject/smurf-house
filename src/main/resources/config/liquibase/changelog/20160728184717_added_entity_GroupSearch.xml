@@ -24,25 +24,26 @@
             <column name="title" type="varchar(256)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="url" type="varchar(2048)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="provider" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="max_limit_price" type="decimal(10,2)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="activated" type="bit">
                 <constraints nullable="true" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
+
 </databaseChangeLog>

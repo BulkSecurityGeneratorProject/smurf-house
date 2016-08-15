@@ -1,19 +1,19 @@
 package com.smurfhouse.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.smurfhouse.domain.enumeration.Provider;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import com.smurfhouse.domain.enumeration.Provider;
+import java.util.Set;
 
 /**
  * A GroupSearch.
@@ -22,7 +22,7 @@ import com.smurfhouse.domain.enumeration.Provider;
 @Table(name = "group_search")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "groupsearch")
-public class GroupSearch implements Serializable {
+public class GroupSearch extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
