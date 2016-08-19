@@ -1,0 +1,18 @@
+{
+    "smurfHouseApp": {
+        "dashboards" : {
+            "market": {
+                "title": "Cuadro de Mando de Mercado",
+                "selectgroupsearch" : "Selecciona un grupo de búsqueda",
+                "search": {
+                    "title": "Título",
+                    "details": "Detalle",
+                    "price":"Precio",
+                    "startDate":"F.Alta",
+                    "updateDate":"F.Actualización"
+                }
+            },
+            "house": "House"
+        }
+    }
+}

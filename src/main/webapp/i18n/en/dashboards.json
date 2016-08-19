@@ -1,0 +1,10 @@
+{
+    "smurfHouseApp": {
+        "dashboards" : {
+            "market": {
+                "title": "Dashboard Market"
+            },
+            "house": "House"
+        }
+    }
+}

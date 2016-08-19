@@ -1,0 +1,86 @@
+<form name="searchForm" role="form" novalidate ng-submit="vm.search()" show-validation>
+    <div ng-cloak id="dashboadMarket">
+
+        <!-- row initial criteria groupsearch -->
+        <div class="row">
+            <div class="col-md-4">
+                <h4 translate="smurfHouseApp.dashboards.market.selectgroupsearch">Select a group of search</h4>
+            </div>
+            <div class="col-md-8">
+
+                <div class="form-group">
+                    <select class="form-control" id="field_groupSearch"
+                            name="groupSearch" ng-model="vm.groupSearch"
+                            ng-options="groupSearch as groupSearch.title for groupSearch in vm.groupsearches track by groupSearch.title">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- row panels -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Filtro</div>
+                    <div class="panel-body">
+                        <p>...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <uib-tabset active="active">
+                    <uib-tab index="0" heading="Resumen búsqueda">
+                        Resumen búsqueda
+                        asdas
+
+                    </uib-tab>
+                    <uib-tab index="1" heading="Grafico - m2 x precio">
+                        Grafico - m2 x precio
+                        asdas
+                        asdasda
+                    </uib-tab>
+
+                </uib-tabset>
+            </div>
+        </div>
+
+        <!-- row button search -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <span  class="input-group-btn width-min" >
+                        <button class="btn btn-info" ng-click="vm.search()">
+                            <span class="glyphicon glyphicon-search"></span> Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- row table result of search -->
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="title"><span translate="smurfHouseApp.dashboards.market.search.title">Key</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="details"><span translate="smurfHouseApp.dashboards.market.search.details">Details</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="price"><span translate="smurfHouseApp.dashboards.market.search.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDate"><span translate="smurfHouseApp.dashboards.market.search.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updateDate"><span translate="smurfHouseApp.dashboards.market.search.updateDate">Update Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="house in vm.houses track by house.id">
+                    <td><a ui-sref="house-detail({id:house.id})">{{house.title}}</a></td>
+                    <td>{{house.details}}</td>
+                    <td>{{house.price | currency:"€":0}}</td>
+                    <td>{{house.startDate | date:'mediumDate'}}</td>
+                    <td>{{house.endDate | date:'mediumDate'}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</form>
