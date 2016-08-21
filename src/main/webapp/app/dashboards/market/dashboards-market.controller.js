@@ -5,11 +5,13 @@
         .module('smurfHouseApp')
         .controller('DashboardsMarketController', DashboardsMarketController);
 
-    DashboardsMarketController.$inject = ['$scope', '$state', 'DashboardsMarket', 'DashboardsMarketSearch',
+    DashboardsMarketController.$inject = ['$scope', '$state', 'DashboardsMarket',
+                                          'House', 'HouseSearch',
                                           'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants',
                                           'GroupSearch'];
 
-    function DashboardsMarketController ($scope, $state, DashboardsMarket, DashboardsMarketSearch,
+    function DashboardsMarketController ($scope, $state, DashboardsMarket,
+                                         House, HouseSearch,
                                          ParseLinks, AlertService, pagingParams, paginationConstants,
                                          GroupSearch) {
         var vm = this;
@@ -29,18 +31,12 @@
         vm.groupsearches = GroupSearch.query();
 
 
-        //loadAll();
+        loadAll();
 
         function loadAll () {
             if (pagingParams.search) {
-                GroupSearchSearch.query({
+                HouseSearch.query({
                     query: pagingParams.search,
-                    page: pagingParams.page - 1,
-                    size: vm.itemsPerPage,
-                    sort: sort()
-                }, onSuccess, onError);
-            } else {
-                GroupSearch.query({
                     page: pagingParams.page - 1,
                     size: vm.itemsPerPage,
                     sort: sort()
@@ -57,7 +53,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.groupSearches = data;
+                vm.houses = data;
                 vm.page = pagingParams.page;
             }
             function onError(error) {
@@ -78,15 +74,18 @@
             });
         }
 
-        function search (searchQuery) {
+        function search () {
+        /*
             if (!searchQuery){
                 return vm.clear();
             }
+            */
             vm.links = null;
             vm.page = 1;
             vm.predicate = '_score';
             vm.reverse = false;
-            vm.currentSearch = searchQuery;
+            //vm.currentSearch = "price:\"240000\" AND _missing_:elevator AND floor:[2 TO 3]";
+            vm.currentSearch = "_missing_:elevator AND floor:[2 TO 3]";
             vm.transition();
         }
 
