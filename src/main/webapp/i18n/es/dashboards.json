@@ -5,6 +5,7 @@
                 "title": "Cuadro de Mando de Mercado",
                 "selectgroupsearch" : "Selecciona un grupo de búsqueda",
                 "search": {
+                    "zone" : "Zona",
                     "title": "Título",
                     "details": "Detalle",
                     "price":"Precio",

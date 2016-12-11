@@ -114,6 +114,9 @@
             vm.predicate = '_score';
             vm.reverse = false;
             var criteria = "";
+            addListCriteria
+            console.log (vm.groupSearch);
+            criteria = addListCriteria (vm.groupSearch.id, "groupSearch.id", criteria);
             criteria = addExistCriteriaBoolean (vm.elevator, "elevator", criteria);
             criteria = addExistCriteriaBoolean (vm.garage, "garage", criteria);
             criteria = addExistCriteriaBoolean (vm.facingOutside, "facingOutside", criteria);
@@ -130,11 +133,25 @@
 
         }
 
+        function addAndToCriteria (criteria) {
+            if (criteria == null || criteria.trim() == "") {
+                return "";
+            } else {
+                return criteria += " AND ";
+            }
+        }
+
+        function addListCriteria (value, field, criteria) {
+            if (value != null) {
+                criteria = addAndToCriteria(criteria);
+                return criteria + field + ":(" + value + ")";
+            }
+            return criteria;
+        }
+
         function addMissingCriteriaBoolean(value, field, criteria) {
             if (value != null && value == true) {
-                if (criteria.trim() != "") {
-                    criteria += " AND ";
-                }
+                criteria = addAndToCriteria(criteria);
                 return criteria + "_missing_:" + field;
             }
             return criteria;
@@ -143,9 +160,7 @@
 
         function addExistCriteriaBoolean(value, field, criteria) {
             if (value != null && value == true) {
-                if (criteria.trim() != "") {
-                    criteria += " AND ";
-                }
+                criteria = addAndToCriteria(criteria);
                 return criteria + "_exists_:" + field;
             }
             return criteria;
@@ -153,10 +168,7 @@
 
         function addRangeNumericCriteria (valueA, valueB, field, criteria) {
             if (valueA != null && valueB != null) {
-
-                if (criteria.trim() != "") {
-                    criteria += " AND ";
-                }
+                criteria = addAndToCriteria(criteria);
                 return criteria + field + ":[" + valueA + " TO " + valueB + "]";
             }
             return criteria

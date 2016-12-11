@@ -1,23 +1,6 @@
 <form name="searchForm" role="form" novalidate ng-submit="vm.search1()" show-validation>
     <div ng-cloak id="dashboadMarket">
 
-        <!-- row initial criteria groupsearch -->
-        <div class="row">
-            <div class="col-md-4">
-                <h4 translate="smurfHouseApp.dashboards.market.selectgroupsearch">Select a group of search</h4>
-            </div>
-            <div class="col-md-8">
-
-                <div class="form-group">
-                    <select class="form-control" id="field_groupSearch"
-                            name="groupSearch" ng-model="vm.groupSearch"
-                            ng-options="groupSearch as groupSearch.title for groupSearch in vm.groupsearches track by groupSearch.title">
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
         <!-- row panels -->
         <div class="row">
             <div class="col-md-6">
@@ -134,11 +117,12 @@
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="title"><span translate="smurfHouseApp.dashboards.market.search.title">Key</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span translate="smurfHouseApp.dashboards.market.search.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="price"><span translate="smurfHouseApp.dashboards.market.search.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th><span translate="smurfHouseApp.dashboards.market.search.priceMeter">Price m2</span></th>
                     <th jh-sort-by="startDate"><span translate="smurfHouseApp.dashboards.market.search.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span translate="smurfHouseApp.dashboards.market.search.updateDate">Update Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span translate="smurfHouseApp.dashboards.market.search.zone">Zone</span> <span class="glyphicon glyphicon-sort"></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -172,6 +156,7 @@
                     </td>
                     <td>{{house.startDate | date:'yyyy-MM-dd'}}</td>
                     <td>{{house.lastModifiedDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{house.groupSearch.title}}</td>
                 </tr>
                 </tbody>
             </table>
