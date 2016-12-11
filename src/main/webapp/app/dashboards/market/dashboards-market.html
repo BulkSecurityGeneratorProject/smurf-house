@@ -1,4 +1,4 @@
-<form name="searchForm" role="form" novalidate ng-submit="vm.search()" show-validation>
+<form name="searchForm" role="form" novalidate ng-submit="vm.search1()" show-validation>
     <div ng-cloak id="dashboadMarket">
 
         <!-- row initial criteria groupsearch -->
@@ -24,15 +24,85 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Filtro</div>
                     <div class="panel-body">
-                        <p>...</p>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputgroupSearch" class="col-sm-3 control-label">Zona</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control input-sm" id="field_groupSearch"
+                                            name="groupSearch" ng-model="vm.groupSearch"
+                                            ng-options="groupSearch as groupSearch.title for groupSearch in vm.groupsearches track by groupSearch.title">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPrice" class="col-sm-3 control-label">Precio</label>
+                                <div class="col-sm-9">
+                                    <slider ng-model="vm.sliderPrice.value" value="vm.sliderPrice.value" min="vm.sliderPrice.min" max="vm.sliderPrice.max" step="vm.sliderPrice.step" range="true"></slider>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                Value: {{ vm.sliderPrice.value }}
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMeters" class="col-sm-3 control-label">Metros</label>
+                                <div class="col-sm-9">
+                                    <slider ng-model="vm.sliderMeters.value" value="vm.sliderMeters.value" min="vm.sliderMeters.min" max="vm.sliderMeters.max" step="vm.sliderMeters.step" range="true"></slider>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                Value: {{ vm.sliderMeters.value }}
+                            </div>
+                            <div class="form-group">
+                                <label for="inputFloor" class="col-sm-3 control-label">Planta</label>
+                                <div class="col-sm-9">
+                                    <slider ng-model="vm.sliderFloor.value" value="vm.sliderFloor.value" min="vm.sliderFloor.min" max="vm.sliderFloor.max" step="vm.sliderFloor.step" range="true"></slider>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                Value: {{ vm.sliderFloor.value }}
+                            </div>
+                            <div class="form-group">
+                                <label for="inputOptions" class="col-sm-3 control-label">Opciones</label>
+                                <div class="col-sm-9">
+                                    <div class="checkbox">
+                                        <input id="checkboxElevator" class="styled" type="checkbox" ng-model="vm.elevator">
+                                        <label for="checkboxElevator">
+                                            Ascensor
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input id="checkboxFacingOutside" class="styled" type="checkbox" ng-model="vm.facingOutside">
+                                        <label for="checkboxFacingOutside">
+                                            Exterior
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input id="checkboxGarage" class="styled" type="checkbox" ng-model="vm.garage">
+                                        <label for="checkboxGarage">
+                                            Garaje
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <uib-tabset active="active">
                     <uib-tab index="0" heading="Resumen búsqueda">
-                        Resumen búsqueda
-                        asdas
+                        <br/>
+                        Total: {{vm.queryCount}}
+                        <br/>
+                        Media Metros: {{vm.avgMeters | number : 2 }}
+                        <br/>
+                        Media Precio: {{vm.avgPrice | currency:"€":0}}
+                        <br/>
+                        Media Precio por metro2: {{vm.avgPriceMeter | currency:"€/m2": 2 }}
+
+
 
                     </uib-tab>
                     <uib-tab index="1" heading="Grafico - m2 x precio">
@@ -58,25 +128,50 @@
             </div>
         </div>
 
+
         <!-- row table result of search -->
         <div class="table-responsive">
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="title"><span translate="smurfHouseApp.dashboards.market.search.title">Key</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="details"><span translate="smurfHouseApp.dashboards.market.search.details">Details</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="price"><span translate="smurfHouseApp.dashboards.market.search.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span translate="smurfHouseApp.dashboards.market.search.priceMeter">Price m2</span></th>
                     <th jh-sort-by="startDate"><span translate="smurfHouseApp.dashboards.market.search.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="updateDate"><span translate="smurfHouseApp.dashboards.market.search.updateDate">Update Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span translate="smurfHouseApp.dashboards.market.search.updateDate">Update Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="house in vm.houses track by house.id">
-                    <td><a ui-sref="house-detail({id:house.id})">{{house.title}}</a></td>
-                    <td>{{house.details}}</td>
-                    <td>{{house.price | currency:"€":0}}</td>
-                    <td>{{house.startDate | date:'mediumDate'}}</td>
-                    <td>{{house.endDate | date:'mediumDate'}}</td>
+                <tr ng-repeat="house in vm.houses track by house.id" ng-init="housePriceMeter = house.price / house.meters">
+                    <td><a ui-sref="house-detail({id:house.id})">{{house.title}}</a>
+                        <br/>
+                        {{house.details}}
+                        <a
+                            uib-tooltip="Acceder a {{house.groupSearch.provider}}"
+                            ng-click="vm.openlink(house.externalLink)">
+                            <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td ng-init="percentPrice = (house.price /  vm.avgPrice) - 1" >
+                        {{house.price | currency:"€":0}}
+                        <br/>
+                        <span ng-class="vm.determineColor( percentPrice)">
+                            {{percentPrice > 0 ? '+' : ''}}{{  percentPrice | number : 2 }}%
+                            <i class="fa fa-info-circle" aria-hidden="true"
+                               uib-tooltip="Percent over the average price {{vm.avgPrice | currency:'€':0 }}"></i>
+                        </span>
+                    </td>
+                    <td ng-init="percentPriceMeter = (housePriceMeter /  vm.avgPriceMeter) - 1" >
+                        {{house.price / house.meters | currency:"€/m2":0}}
+                        <br/>
+                        <span ng-class="vm.determineColor( percentPriceMeter )">
+                            {{percentPriceMeter > 0 ? '+' : ''}}{{ percentPriceMeter | number : 2 }}%
+                            <i class="fa fa-info-circle" aria-hidden="true"
+                               uib-tooltip="Percent over the average price/meter {{vm.avgPriceMeter | currency:'€':0 }}"></i>
+                        </span>
+                    </td>
+                    <td>{{house.startDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{house.lastModifiedDate | date:'yyyy-MM-dd'}}</td>
                 </tr>
                 </tbody>
             </table>

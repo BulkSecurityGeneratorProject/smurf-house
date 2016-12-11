@@ -37,7 +37,7 @@ public class ManagerIdealista {
         try {
             do {
                 doc = proxy.getPage(next);
-                pageParsed = scratch.parsePage(doc,locale);
+                pageParsed = scratch.parsePage(url, doc,locale);
 
                 houses.addAll(pageParsed.getHousesCurrentPage());
                 next = proxy.getUrlBaseProxy() +  pageParsed.getNextUrl();

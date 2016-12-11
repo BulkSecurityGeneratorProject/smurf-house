@@ -84,7 +84,7 @@ public class ScratchService {
                     )
                 );
 
-        log.trace("Houses in ddbb : {} ", mHouses);
+        log.debug("Houses in ddbb : {} ", mHouses);
 
         List<ScratchHouse> scratchHouses = managerIdealista.getAllHouse(groupsearch.getUrl(), new Locale("es", "ES"));
 
@@ -144,6 +144,9 @@ public class ScratchService {
             house.setEndDate(LocalDate.now());
             houseRepository.save(house);
             stats.houseEnded++;
+
+            log.info("House ended {}-{} with price: :  ", house.getId(), house.getTitle(), house.getPrice());
+            log.debug("    House ended {} :  ",house.toString());
         }
 
         return stats;
@@ -166,9 +169,10 @@ public class ScratchService {
         house.setPrice(scratchHouse.getPrice());
         house.setDetails(scratchHouse.getDetails());
         house.setElevator(scratchHouse.getHasElevator());
-        house.setExternalLink(scratchHouse.getTitle()); //TODO check what we can do it.
+        house.setExternalLink(scratchHouse.getUrl());
         house.setFacingOutside(scratchHouse.getFacingOutside());
         house.setFloor(scratchHouse.getFloor());
+
         house.setGarage(scratchHouse.getHasGarage());
         house.setGroupSearch(groupSearch);
         house.setKey(key);
@@ -183,7 +187,7 @@ public class ScratchService {
         StringJoiner sj = new StringJoiner(":");
         sj.add(scratchHouse.getTitle());
         sj.add(String.valueOf(scratchHouse.getFacingOutside()));
-        sj.add(scratchHouse.getFloor());
+        sj.add(String.valueOf(scratchHouse.getFloor()));
         sj.add(String.valueOf(scratchHouse.getHasElevator()));
         sj.add(String.valueOf(scratchHouse.getHasGarage()));
         sj.add(String.valueOf(scratchHouse.getMeters()));

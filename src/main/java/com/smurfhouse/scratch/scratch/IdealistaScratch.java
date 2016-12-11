@@ -34,7 +34,7 @@ public class IdealistaScratch {
 
     public static final String REGEXP_MATCH_GARAGE = ".*Garaje incluido.*";
 
-    public PageParsed parsePage (Document doc, Locale locale) {
+    public PageParsed parsePage (String url, Document doc, Locale locale) {
         if (doc == null || locale == null) {
             return new PageParsed (new LinkedList<ScratchHouse>(), null);
         }
@@ -43,7 +43,7 @@ public class IdealistaScratch {
 
         Elements elements = doc.select("article");
         for (Element e: elements) {
-            ScratchHouse h = parseHouse(e, locale);
+            ScratchHouse h = parseHouse(url, e, locale);
             if (h != null) {
                 lHouses.add(h);
             }
@@ -60,7 +60,7 @@ public class IdealistaScratch {
     }
 
 
-    private ScratchHouse parseHouse(Element element, Locale locale) {
+    private ScratchHouse parseHouse(String url, Element element, Locale locale) {
         ScratchHouse house = new ScratchHouse();
 
         String id = findAttributeElementSafeNullPointer(element, ".item-link", "href");
@@ -87,10 +87,10 @@ public class IdealistaScratch {
                     i = findIntegerFirstGroupByRegExpSafeNullPointer(text, REGEXP_ROOMS, locale);
                     if (i != null) house.setNumberRooms(i);
 
-                    String s = findTextFirstGroupByRegExpSafeNullPointer(text, REGEXP_FLOOR_PLANTA);
-                    if (s != null) house.setFloor(s);
-                    s = findTextFirstGroupByRegExpSafeNullPointer(text, REGEXP_FLOOR_BAJA);
-                    if (s != null) house.setFloor(s);
+                    i = findIntegerFirstGroupByRegExpSafeNullPointer(text, REGEXP_FLOOR_PLANTA, locale);
+                    if (i != null) house.setFloor(i);
+                    String s = findTextFirstGroupByRegExpSafeNullPointer(text, REGEXP_FLOOR_BAJA);
+                    if (s != null) house.setFloor(0);
 
                     Boolean match = matchTextByRegExpSafeNullPointer(text, REGEXP_MATCH_ELEVATOR);
                     if (Boolean.TRUE.equals(match)) house.setHasElevator(match);
@@ -104,6 +104,17 @@ public class IdealistaScratch {
                     return text;
                 })
                 .collect(Collectors.joining(" ")));
+
+        StringBuilder stringOrder = new StringBuilder();
+        stringOrder.append("/con-metros-cuadrados-mas-de_");
+        stringOrder.append(house.getMeters());
+        stringOrder.append(",metros-cuadrados-menos-de_");
+        stringOrder.append(house.getMeters());
+
+        int pos = url.indexOf("/?ordenado-por=");
+        String urlSearch= new StringBuilder(url).insert(pos, stringOrder).toString();
+        house.setUrl(urlSearch);
+
 
         return house;
     }

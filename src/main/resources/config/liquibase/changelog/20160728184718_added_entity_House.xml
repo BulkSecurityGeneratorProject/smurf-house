@@ -24,57 +24,57 @@
             <column name="key" type="varchar(2048)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="external_link" type="varchar(2048)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="price" type="decimal(10,2)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="start_date" type="date">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="end_date" type="date">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="meters" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="numrooms" type="integer">
                 <constraints nullable="true" />
             </column>
-            
-            <column name="floor" type="varchar(255)">
+
+            <column name="floor" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="details" type="varchar(4096)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="elevator" type="bit">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="facing_outside" type="bit">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="garage" type="bit">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="group_search_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
 </databaseChangeLog>

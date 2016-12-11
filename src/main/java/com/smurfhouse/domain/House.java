@@ -61,7 +61,7 @@ public class House extends AbstractAuditingEntity implements Serializable {
     private Integer numrooms;
 
     @Column(name = "floor")
-    private String floor;
+    private Integer floor;
 
     @Size(max = 4096)
     @Column(name = "details", length = 4096)
@@ -148,11 +148,11 @@ public class House extends AbstractAuditingEntity implements Serializable {
         this.numrooms = numrooms;
     }
 
-    public String getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setFloor(String floor) {
+    public void setFloor(Integer floor) {
         this.floor = floor;
     }
 

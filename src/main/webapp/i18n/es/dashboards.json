@@ -9,7 +9,8 @@
                     "details": "Detalle",
                     "price":"Precio",
                     "startDate":"F.Alta",
-                    "updateDate":"F.Actualización"
+                    "updateDate":"F.Actualización",
+                    "priceMeter": "€/m2"
                 }
             },
             "house": "House"

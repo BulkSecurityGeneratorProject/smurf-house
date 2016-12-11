@@ -26,7 +26,7 @@ public class ScratchHouse {
     }
 
     private String url;
-    private String floor;
+    private Integer floor;
 
 
     public String getId() {
@@ -101,11 +101,11 @@ public class ScratchHouse {
         this.url = url;
     }
 
-    public String getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setFloor(String floor) {
+    public void setFloor(Integer floor) {
         this.floor = floor;
     }
 
