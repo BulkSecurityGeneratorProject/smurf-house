@@ -142,22 +142,22 @@
                             <i class="fa fa-picture-o" aria-hidden="true"></i>
                         </a>
                     </td>
-                    <td ng-init="percentPrice = (house.price /  vm.avgPrice) - 1" >
+                    <td ng-init="percentPrice = ((house.price /  vm.avgPrice) - 1) * 100" >
                         {{house.price | currency:"€":0}}
                         <br/>
                         <span ng-class="vm.determineColor( percentPrice)">
                             {{percentPrice > 0 ? '+' : ''}}{{  percentPrice | number : 2 }}%
                             <i class="fa fa-info-circle" aria-hidden="true"
-                               uib-tooltip="Percent over the average price {{vm.avgPrice | currency:'€':0 }}"></i>
+                               uib-tooltip="Percent of difference over the average price {{vm.avgPrice | currency:'€':0 }}"></i>
                         </span>
                     </td>
-                    <td ng-init="percentPriceMeter = (housePriceMeter /  vm.avgPriceMeter) - 1" >
+                    <td ng-init="percentPriceMeter = ((housePriceMeter /  vm.avgPriceMeter) - 1) * 100" >
                         {{house.price / house.meters | currency:"€/m2":0}}
                         <br/>
                         <span ng-class="vm.determineColor( percentPriceMeter )">
                             {{percentPriceMeter > 0 ? '+' : ''}}{{ percentPriceMeter | number : 2 }}%
                             <i class="fa fa-info-circle" aria-hidden="true"
-                               uib-tooltip="Percent over the average price/meter {{vm.avgPriceMeter | currency:'€':0 }}"></i>
+                               uib-tooltip="Percent of difference over the average price/meter {{vm.avgPriceMeter | currency:'€':0 }}"></i>
                         </span>
                     </td>
                     <td>{{house.startDate | date:'yyyy-MM-dd'}}</td>
