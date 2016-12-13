@@ -114,9 +114,9 @@
             vm.predicate = '_score';
             vm.reverse = false;
             var criteria = "";
-            addListCriteria
+
             console.log (vm.groupSearch);
-            criteria = addListCriteria (vm.groupSearch.id, "groupSearch.id", criteria);
+            criteria = addGroupSearchCriteria (vm.groupSearch, "groupSearch.id", criteria);
             criteria = addExistCriteriaBoolean (vm.elevator, "elevator", criteria);
             criteria = addExistCriteriaBoolean (vm.garage, "garage", criteria);
             criteria = addExistCriteriaBoolean (vm.facingOutside, "facingOutside", criteria);
@@ -141,10 +141,19 @@
             }
         }
 
-        function addListCriteria (value, field, criteria) {
-            if (value != null) {
+        function addGroupSearchCriteria (zones, field, criteria) {
+            if (zones != null && zones.length != null && zones.length != 0 ) {
                 criteria = addAndToCriteria(criteria);
-                return criteria + field + ":(" + value + ")";
+
+                var s = "";
+                angular.forEach(zones, function (zone) {
+                    s+= (s=="") ? "" :  " OR " ;
+                    s+= zone.id;
+                });
+
+
+
+                return criteria + field + ":(" + s + ")";
             }
             return criteria;
         }

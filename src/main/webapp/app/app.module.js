@@ -3,9 +3,9 @@
 
     angular
         .module('smurfHouseApp', [
-            'ngStorage', 
+            'ngStorage',
             'tmh.dynamicLocale',
-            'pascalprecht.translate', 
+            'pascalprecht.translate',
             'ngResource',
             'ngCookies',
             'ngAria',
@@ -18,7 +18,9 @@
             'NgSwitchery',
             'ui.bootstrap-slider',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
-            'angular-loading-bar'
+            'angular-loading-bar',
+            'ui.select',
+            'ngSanitize'
         ])
         .run(run);
 

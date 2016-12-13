@@ -8,14 +8,20 @@
                     <div class="panel-heading">Filtro</div>
                     <div class="panel-body">
                         <form class="form-horizontal">
+
                             <div class="form-group">
                                 <label for="inputgroupSearch" class="col-sm-3 control-label">Zona</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control input-sm" id="field_groupSearch"
-                                            name="groupSearch" ng-model="vm.groupSearch"
-                                            ng-options="groupSearch as groupSearch.title for groupSearch in vm.groupsearches track by groupSearch.title">
-                                        <option value=""></option>
-                                    </select>
+                                    <ui-select multiple ng-model="vm.groupSearch" theme="bootstrap" ng-disabled="disabled" title="Choose a zone">
+                                        <ui-select-match placeholder="Select zone...">{{$item.title}}</ui-select-match>
+                                        <ui-select-choices repeat="zone in vm.groupsearches ">
+                                            <div ng-bind-html="zone.title | highlight: $select.search"></div>
+                                            <small>
+                                                {{zone.provider}}
+                                                , maxLimitPrice: {{zone.maxLimitPrice | currency:"€":0}}
+                                            </small>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                             <div class="form-group">
