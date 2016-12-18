@@ -56,8 +56,66 @@
         vm.sliderFloor.max = 10;
         vm.sliderFloor.step = 1;
 
+
+        vm.options = {
+            chart: {
+                type: 'scatterChart',
+                scatter: {
+	            		dispatch: {
+                            elementClick: function (e) {
+                                vm.openlink(e.point.data.externalLink);
+                            },
+                            elementMouseover: function(e){
+                                var row = $("#" + e.point.data.id);
+                                row.css("background","yellow");
+                            },
+                            elementMouseout: function(e){
+                                var row = $("#" + e.point.data.id);
+                                row.css("background","");
+
+                            }
+	                    }
+	            },
+                height: 250,
+                showLegend: false,
+                showDistX: true,
+                showDistY: true,
+                /*
+                tooltip: {
+                    contentGenerator: function(d) {
+                        console.log(d);
+                        var title = d.point.data.title;
+                        var price = d.point.data.price;
+                        var description = d.point.data.details;
+                        return '<p><h6>' + title + '</h6> - ' + price + '<br/><small>' + description + "</small></p>";
+                    }
+                },
+                */
+                duration: 350,
+                xAxis: {
+                    axisLabel: '€/m2',
+                    tickFormat: function(d){
+                        return d3.format('.0')(d);
+                    }
+                },
+                yAxis: {
+                    axisLabel: 'm2',
+                    tickFormat: function(d){
+                        return d3.format('.0')(d);
+                    },
+                    axisLabelDistance: -5
+                },
+            }
+        };
+        vm.data = [];
+        /*
+        vm.data = [ {
+            key: 'xxxx',
+            values: []
+         }];
+         */
+
         function transition () {
-            console.log ("transition ");
 
             HouseSearch.query({
                 query: vm.currentSearch,
@@ -81,6 +139,8 @@
                 vm.queryCount = vm.totalItems;
                 vm.houses = data;
                 calculateAvgCounters();
+                refreshGraph ();
+                vm.api.refresh();
             }
             function onError(error) {
                 AlertService.error(error.data.message);
@@ -101,10 +161,33 @@
 
             }
 
+            function refreshGraph(){
+
+                vm.data = [];
+                var cnt = 0;
+
+                angular.forEach(vm.houses, function (house) {
+                    vm.data.push({
+                        key: house.title,
+                        values: []
+                     });
+                    var sizePoint = (0.5 * house.price ) / vm.avgPrice;
+                    vm.data[cnt].values.push( {
+                                            x: Math.round(house.price / house.meters) ,
+                                            y: house.meters,
+                                            size: sizePoint,
+                                            shape: 'circle',
+                                            data: house
+                    } )
+
+                    cnt++;
+                });
+            }
+
         }
 
         function search () {
-        /*
+            /*
             if (!searchQuery){
                 return vm.clear();
             }
@@ -115,7 +198,6 @@
             vm.reverse = false;
             var criteria = "";
 
-            console.log (vm.groupSearch);
             criteria = addGroupSearchCriteria (vm.groupSearch, "groupSearch.id", criteria);
             criteria = addExistCriteriaBoolean (vm.elevator, "elevator", criteria);
             criteria = addExistCriteriaBoolean (vm.garage, "garage", criteria);
@@ -198,8 +280,7 @@
 
         function openlink(url)
         {
-            console.log(url);
-            alert (url);
+            console.log("open " , url);
             var instance = window.open("about:blank");
             instance.document.write("<meta http-equiv=\"refresh\" content=\"0;url="+url+"\">");
             instance.document.close();

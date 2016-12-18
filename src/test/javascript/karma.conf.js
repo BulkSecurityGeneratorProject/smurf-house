@@ -29,6 +29,8 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/transitionize/dist/transitionize.js',
             'src/main/webapp/bower_components/fastclick/lib/fastclick.js',
             'src/main/webapp/bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js',
+            'src/main/webapp/bower_components/d3/d3.js',
+            'src/main/webapp/bower_components/nvd3/build/nv.d3.js',
             'src/main/webapp/bower_components/angular/angular.js',
             'src/main/webapp/bower_components/angular-aria/angular-aria.js',
             'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -50,6 +52,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/switchery/dist/switchery.js',
             'src/main/webapp/bower_components/angular-bootstrap-slider/slider.js',
             'src/main/webapp/bower_components/angular-ui-select/dist/select.js',
+            'src/main/webapp/bower_components/angular-nvd3/dist/angular-nvd3.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
             'src/main/webapp/bower_components/ng-switchery/src/ng-switchery.js',
             // endbower

@@ -20,6 +20,7 @@
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar',
             'ui.select',
+            'nvd3',
             'ngSanitize'
         ])
         .run(run);
