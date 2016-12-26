@@ -32,12 +32,12 @@ public class ManagerIdealista {
 
         Document doc = null;
         PageParsed pageParsed = null;
-        String next = URL_IDEALISTA;
+        String next = url;
 
         try {
             do {
                 doc = proxy.getPage(next);
-                pageParsed = scratch.parsePage(url, doc,locale);
+                pageParsed = scratch.parsePage(next, doc,locale);
 
                 houses.addAll(pageParsed.getHousesCurrentPage());
                 next = proxy.getUrlBaseProxy() +  pageParsed.getNextUrl();

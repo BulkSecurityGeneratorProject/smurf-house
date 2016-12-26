@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span translate="smurfHouseApp.houseUpdate.detail.title">House Update</span> {{vm.houseUpdate.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="smurfHouseApp.houseUpdate.operation">Operation</span></dt>
+        <dd>
+            <span translate="{{'smurfHouseApp.HouseUpdateOperation.' + vm.houseUpdate.operation}}">{{vm.houseUpdate.operation}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.houseUpdate.update">Update</span></dt>
+        <dd>
+            <a ui-sref="update-detail({id:vm.houseUpdate.update.id})">{{vm.houseUpdate.update.updateDate}}</a>
+        </dd>
+        <dt><span translate="smurfHouseApp.houseUpdate.house">House</span></dt>
+        <dd>
+            <a ui-sref="house-detail({id:vm.houseUpdate.house.id})">{{vm.houseUpdate.house.title}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="house-update-detail.edit({id:vm.houseUpdate.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

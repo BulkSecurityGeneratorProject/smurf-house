@@ -1,21 +1,23 @@
 package com.smurfhouse.domain;
 
+import com.smurfhouse.domain.enumeration.HouseUpdateOperation;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * A PriceHouse.
+ * A HouseUpdate.
  */
 @Entity
-@Table(name = "price_house")
-@Document(indexName = "pricehouse")
-public class PriceHouse extends AbstractAuditingEntity implements Serializable {
+@Table(name = "house_update")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Document(indexName = "houseupdate")
+public class HouseUpdate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,12 +26,12 @@ public class PriceHouse extends AbstractAuditingEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "price", precision=10, scale=2, nullable = false)
-    private BigDecimal price;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "operation", nullable = false)
+    private HouseUpdateOperation operation;
 
-    @NotNull
-    @Column(name = "when_changed", nullable = false)
-    private LocalDate whenChanged;
+    @ManyToOne
+    private Update update;
 
     @ManyToOne
     private House house;
@@ -42,20 +44,20 @@ public class PriceHouse extends AbstractAuditingEntity implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public HouseUpdateOperation getOperation() {
+        return operation;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setOperation(HouseUpdateOperation operation) {
+        this.operation = operation;
     }
 
-    public LocalDate getWhenChanged() {
-        return whenChanged;
+    public Update getUpdate() {
+        return update;
     }
 
-    public void setWhenChanged(LocalDate whenChanged) {
-        this.whenChanged = whenChanged;
+    public void setUpdate(Update update) {
+        this.update = update;
     }
 
     public House getHouse() {
@@ -74,11 +76,11 @@ public class PriceHouse extends AbstractAuditingEntity implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PriceHouse priceHouse = (PriceHouse) o;
-        if(priceHouse.id == null || id == null) {
+        HouseUpdate houseUpdate = (HouseUpdate) o;
+        if(houseUpdate.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, priceHouse.id);
+        return Objects.equals(id, houseUpdate.id);
     }
 
     @Override
@@ -88,10 +90,9 @@ public class PriceHouse extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "PriceHouse{" +
+        return "HouseUpdate{" +
             "id=" + id +
-            ", price='" + price + "'" +
-            ", whenChanged='" + whenChanged + "'" +
+            ", operation='" + operation + "'" +
             '}';
     }
 }

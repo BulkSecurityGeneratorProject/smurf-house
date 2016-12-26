@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span translate="smurfHouseApp.update.detail.title">Update</span> {{vm.update.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="smurfHouseApp.update.updateDate">Update Date</span></dt>
+        <dd>
+            <span>{{vm.update.updateDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.update.news">News</span></dt>
+        <dd>
+            <span>{{vm.update.news}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.update.deletes">Deletes</span></dt>
+        <dd>
+            <span>{{vm.update.deletes}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.update.priceUpdates">Price Updates</span></dt>
+        <dd>
+            <span>{{vm.update.priceUpdates}}</span>
+        </dd>
+        <dt><span translate="smurfHouseApp.update.groupSearch">Group Search</span></dt>
+        <dd>
+            <a ui-sref="group-search-detail({id:vm.update.groupSearch.id})">{{vm.update.groupSearch.title}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="update-detail.edit({id:vm.update.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

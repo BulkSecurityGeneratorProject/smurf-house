@@ -1,0 +1,10 @@
+{
+    "smurfHouseApp": {
+        "HouseUpdateOperation" : {
+            "null": "",
+            "NEW": "NEW",
+            "DELETE": "DELETE",
+            "PRICEUPDATE": "PRICEUPDATE"
+        }
+    }
+}

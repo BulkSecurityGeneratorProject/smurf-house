@@ -1,2 +1,4 @@
 id;title;url;provider;max_limit_price;activated;last_modified_date;created_date;last_modified_by;created_by
 1;San Juan Bautista;http://www.idealista.com/venta-viviendas/madrid/ciudad-lineal/san-juan-bautista/?ordenado-por=precio-asc;IDEALISTA;300000;true;2016-08-01;2016-08-01;system;system
+2;Colina;https://www.idealista.com/venta-viviendas/madrid/ciudad-lineal/colina/?ordenado-por=precio-asc;IDEALISTA;300000;true;2016-08-01;2016-08-01;system;system
+3;Prosperidad;https://www.idealista.com/venta-viviendas/madrid/chamartin/prosperidad/?ordenado-por=precio-asc;IDEALISTA;300000;true;2016-08-01;2016-08-01;system;system

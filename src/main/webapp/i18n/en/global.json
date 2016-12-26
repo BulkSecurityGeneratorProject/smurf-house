@@ -14,6 +14,8 @@
                 "groupSearch": "Group Search",
                 "house": "House",
                 "priceHouse": "Price House",
+                "update": "Update",
+                "houseUpdate": "House Update",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

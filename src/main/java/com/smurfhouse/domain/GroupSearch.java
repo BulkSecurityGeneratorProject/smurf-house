@@ -2,8 +2,6 @@ package com.smurfhouse.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smurfhouse.domain.enumeration.Provider;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -20,7 +18,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "group_search")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "groupsearch")
 public class GroupSearch extends AbstractAuditingEntity implements Serializable {
 
@@ -53,7 +50,6 @@ public class GroupSearch extends AbstractAuditingEntity implements Serializable 
 
     @OneToMany(mappedBy = "groupSearch")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<House> houses = new HashSet<>();
 
     public Long getId() {

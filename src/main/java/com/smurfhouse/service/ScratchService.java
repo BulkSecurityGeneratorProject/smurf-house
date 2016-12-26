@@ -1,12 +1,9 @@
 package com.smurfhouse.service;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smurfhouse.domain.GroupSearch;
-import com.smurfhouse.domain.House;
-import com.smurfhouse.domain.PriceHouse;
-import com.smurfhouse.repository.GroupSearchRepository;
-import com.smurfhouse.repository.HouseRepository;
-import com.smurfhouse.repository.PriceHouseRepository;
+import com.smurfhouse.domain.*;
+import com.smurfhouse.domain.enumeration.HouseUpdateOperation;
+import com.smurfhouse.repository.*;
 import com.smurfhouse.scratch.ManagerIdealista;
 import com.smurfhouse.scratch.model.ScratchHouse;
 import com.smurfhouse.web.rest.dto.StatsSincronyzeDTO;
@@ -40,6 +37,13 @@ public class ScratchService {
     @Inject
     PriceHouseRepository priceHouseRepository;
 
+    @Inject
+    UpdateRepository updateRepository;
+
+    @Inject
+    HouseUpdateRepository houseUpdateRepository;
+
+
     @Timed
     public StatsSincronyzeDTO synchronizeAll () {
 
@@ -64,8 +68,22 @@ public class ScratchService {
 
 
     public StatsSincronyzeDTO synchronizeByGroupSearch (GroupSearch groupsearch) {
+
+        //Scratch manager
         ManagerIdealista managerIdealista = new ManagerIdealista();
+
+        //Stats
         StatsSincronyzeDTO stats = new StatsSincronyzeDTO ();
+
+        //Prepare update entity tracking
+        Update update = new Update();
+        update.setUpdateDate(LocalDate.now());
+        update.setGroupSearch(groupsearch);
+        update.setNews(0);
+        update.setDeletes(0);
+        update.setPriceUpdates(0);
+        updateRepository.save(update);
+
 
         log.info("Process groupSearch [{}] {} : {} ", groupsearch.getId(), groupsearch.getTitle(), groupsearch.getUrl());
 
@@ -78,13 +96,14 @@ public class ScratchService {
                     Function.identity(),
                     (house1, house2) ->
                     {
-                        houseRepository.delete(house2);
+                        //houseRepository.delete(house2);
                         return house1;
                     }
                     )
                 );
 
         log.debug("Houses in ddbb : {} ", mHouses);
+        log.debug("Houses in ddbb : {} ", groupsearch.getHouses());
 
         List<ScratchHouse> scratchHouses = managerIdealista.getAllHouse(groupsearch.getUrl(), new Locale("es", "ES"));
 
@@ -92,10 +111,15 @@ public class ScratchService {
         if (scratchHouses == null || scratchHouses.size()==0) {
             log.info("Not returned house doing scratching, could be issue, therefore, skipping the sync for groupSearch [{}] {} ",
                 groupsearch.getId(), groupsearch.getTitle());
+
+            //Updade tracker
+            //TODO indicate some field to report the issue
+            updateRepository.save(update);
             return stats;
         }
 
         for (ScratchHouse scratchHouse : scratchHouses) {
+
             String key = generateKey(scratchHouse);
             log.info("Checking scratchHouse : {} - {}. Key: {}", scratchHouse.getTitle() , scratchHouse.getDetails() , key);
 
@@ -117,6 +141,13 @@ public class ScratchService {
                     stats.houseNewPrice++;
                     //priceHouseRepository.save(priceHouse);
                     log.info("House {}-{} has new price {} ", house.getId(), house.getTitle(), actualPrice);
+
+                    //UpdateHouse tracking
+                    HouseUpdate houseUpdate = new HouseUpdate();
+                    houseUpdate.setUpdate(update);
+                    houseUpdate.setHouse(house);
+                    houseUpdate.setOperation(HouseUpdateOperation.PRICEUPDATE);
+                    houseUpdateRepository.save(houseUpdate);
                 }
 
                 // remove of mHouse to evict the phase of prune.
@@ -136,10 +167,17 @@ public class ScratchService {
                 log.info("New House added {}-{} with price: :  ", house.getId(), house.getTitle(), house.getPrice());
                 log.debug("    House added {} :  ",house.toString());
 
+                //UpdateHouse tracking
+                HouseUpdate houseUpdate = new HouseUpdate();
+                houseUpdate.setUpdate(update);
+                houseUpdate.setHouse(house);
+                houseUpdate.setOperation(HouseUpdateOperation.NEW);
+                houseUpdateRepository.save(houseUpdate);
+
             }
         }
 
-        //phase of purge orphans (when in tvDB has been removed, also need to remove in the local ddbb)
+        //phase of purge orphans (when search idalista has been ended, also need to end in the local ddbb)
         for (House house : mHouses.values()){
             house.setEndDate(LocalDate.now());
             houseRepository.save(house);
@@ -147,7 +185,20 @@ public class ScratchService {
 
             log.info("House ended {}-{} with price: :  ", house.getId(), house.getTitle(), house.getPrice());
             log.debug("    House ended {} :  ",house.toString());
+
+            //UpdateHouse tracking
+            HouseUpdate houseUpdate = new HouseUpdate();
+            houseUpdate.setUpdate(update);
+            houseUpdate.setHouse(house);
+            houseUpdate.setOperation(HouseUpdateOperation.DELETE);
+            houseUpdateRepository.save(houseUpdate);
         }
+
+        //Update tracking
+        update.setNews(stats.houseAdded);
+        update.setDeletes(stats.houseEnded);
+        update.setPriceUpdates(stats.houseNewPrice);
+        updateRepository.save(update);
 
         return stats;
     }

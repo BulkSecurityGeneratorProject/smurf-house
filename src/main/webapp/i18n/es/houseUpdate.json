@@ -1,0 +1,24 @@
+{
+    "smurfHouseApp": {
+        "houseUpdate" : {
+            "home": {
+                "title": "House Updates",
+                "createLabel": "Crear nuevo House Update",
+                "createOrEditLabel": "Crear o editar House Update",
+                "search": "Search for House Update"
+            },
+            "created": "Un nuevo House Update ha sido creado con el identificador {{ param }}",
+            "updated": "Un House Update ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un House Update ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar House Update {{ id }}?"
+            },
+            "detail": {
+                "title": "House Update"
+            },
+            "operation": "Operation",
+            "update": "Update",
+            "house": "House"
+        }
+    }
+}

@@ -98,7 +98,7 @@
                     <span  class="input-group-btn width-min" >
                         <button class="btn btn-info" ng-click="vm.search()">
                             <span class="glyphicon glyphicon-search"></span> Search
-                            <span class="badge" ng-show="{{vm.queryCount}}>0">{{vm.queryCount}}</span>
+                            <span class="badge" ng-show="{{vm.queryCount > 0}}">{{vm.queryCount}}</span>
                         </button>
                         <button class="btn btn-info" ng-click="vm.api.refresh()">
                             <span class="fa fa-refresh"></span> Refresh Graph

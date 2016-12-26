@@ -1,0 +1,33 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "update",
+            "otherEntityName": "update",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "updateDate"
+        },
+        {
+            "relationshipName": "house",
+            "otherEntityName": "house",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "title",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "houseUpdate"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "operation",
+            "fieldType": "HouseUpdateOperation",
+            "fieldValues": "NEW, DELETE, PRICEUPDATE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20161218201834",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "house_update",
+    "pagination": "pagination"
+}

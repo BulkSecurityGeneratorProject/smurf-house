@@ -1,0 +1,44 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "groupSearch",
+            "otherEntityName": "groupSearch",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "title",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "update"
+        },
+        {
+            "relationshipName": "houseUpdate",
+            "otherEntityName": "houseUpdate",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "update"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "updateDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "news",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "deletes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "priceUpdates",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20161218201023",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "update",
+    "pagination": "pagination"
+}

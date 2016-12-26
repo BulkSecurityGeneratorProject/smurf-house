@@ -1,0 +1,27 @@
+{
+    "smurfHouseApp": {
+        "update" : {
+            "home": {
+                "title": "Updates",
+                "createLabel": "Create a new Update",
+                "createOrEditLabel": "Create or edit a Update",
+                "search": "Search for Update"
+            },
+            "created": "A new Update is created with identifier {{ param }}",
+            "updated": "A Update is updated with identifier {{ param }}",
+            "deleted": "A Update is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Update {{ id }}?"
+            },
+            "detail": {
+                "title": "Update"
+            },
+            "updateDate": "Update Date",
+            "news": "News",
+            "deletes": "Deletes",
+            "priceUpdates": "Price Updates",
+            "groupSearch": "Group Search",
+            "houseUpdate": "House Update"
+        }
+    }
+}

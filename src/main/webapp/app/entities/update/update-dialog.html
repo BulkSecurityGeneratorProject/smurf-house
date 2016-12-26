@@ -1,0 +1,66 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUpdateLabel" translate="smurfHouseApp.update.home.createOrEditLabel">Create or edit a Update</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.update.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.update.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.update.updateDate" for="field_updateDate">Update Date</label>
+                <div class="input-group">
+                    <input id="field_updateDate" type="text" class="form-control" name="updateDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.update.updateDate" is-open="vm.datePickerOpenStatus.updateDate"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updateDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.updateDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.updateDate.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.update.news" for="field_news">News</label>
+            <input type="number" class="form-control" name="news" id="field_news"
+                    ng-model="vm.update.news"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.update.deletes" for="field_deletes">Deletes</label>
+            <input type="number" class="form-control" name="deletes" id="field_deletes"
+                    ng-model="vm.update.deletes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smurfHouseApp.update.priceUpdates" for="field_priceUpdates">Price Updates</label>
+            <input type="number" class="form-control" name="priceUpdates" id="field_priceUpdates"
+                    ng-model="vm.update.priceUpdates"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smurfHouseApp.update.groupSearch" for="field_groupSearch">Group Search</label>
+            <select class="form-control" id="field_groupSearch" name="groupSearch" ng-model="vm.update.groupSearch" ng-options="groupSearch as groupSearch.title for groupSearch in vm.groupsearches | orderBy:'id' track by groupSearch.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -37,10 +37,22 @@ public class ElasticsearchIndexService {
     private HouseSearchRepository houseSearchRepository;
 
     @Inject
+    private HouseUpdateRepository houseUpdateRepository;
+
+    @Inject
+    private HouseUpdateSearchRepository houseUpdateSearchRepository;
+
+    @Inject
     private PriceHouseRepository priceHouseRepository;
 
     @Inject
     private PriceHouseSearchRepository priceHouseSearchRepository;
+
+    @Inject
+    private UpdateRepository updateRepository;
+
+    @Inject
+    private UpdateSearchRepository updateSearchRepository;
 
     @Inject
     private UserRepository userRepository;
@@ -56,7 +68,9 @@ public class ElasticsearchIndexService {
     public void reindexAll() {
         reindexForClass(GroupSearch.class, groupSearchRepository, groupSearchSearchRepository);
         reindexForClass(House.class, houseRepository, houseSearchRepository);
+        reindexForClass(HouseUpdate.class, houseUpdateRepository, houseUpdateSearchRepository);
         reindexForClass(PriceHouse.class, priceHouseRepository, priceHouseSearchRepository);
+        reindexForClass(Update.class, updateRepository, updateSearchRepository);
         reindexForClass(User.class, userRepository, userSearchRepository);
 
         log.info("Elasticsearch: Successfully performed reindexing");

@@ -3,13 +3,13 @@
 
     angular
         .module('smurfHouseApp')
-        .controller('GroupSearchController', GroupSearchController);
+        .controller('HouseUpdateController', HouseUpdateController);
 
-    GroupSearchController.$inject = ['$scope', '$state', 'GroupSearch', 'GroupSearchSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    HouseUpdateController.$inject = ['$scope', '$state', 'HouseUpdate', 'HouseUpdateSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
 
-    function GroupSearchController ($scope, $state, GroupSearch, GroupSearchSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function HouseUpdateController ($scope, $state, HouseUpdate, HouseUpdateSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
-
+        
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
@@ -20,35 +20,19 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
-        vm.refreshSync = refreshSync;
 
         loadAll();
 
-
-        function refreshSync (id) {
-                    console.log('refresh sync for ', id);
-
-                    GroupSearch.sync({id:id}, {}, function(result, headers){
-                        console.log('result: ', result);
-                        console.log('headers: ', headers);
-
-                        //vm.audits = result;
-                        //vm.links = ParseLinks.parse(headers('link'));
-                        //vm.totalItems = headers('X-Total-Count');
-                    });
-
-                }
-
         function loadAll () {
             if (pagingParams.search) {
-                GroupSearchSearch.query({
+                HouseUpdateSearch.query({
                     query: pagingParams.search,
                     page: pagingParams.page - 1,
                     size: vm.itemsPerPage,
                     sort: sort()
                 }, onSuccess, onError);
             } else {
-                GroupSearch.query({
+                HouseUpdate.query({
                     page: pagingParams.page - 1,
                     size: vm.itemsPerPage,
                     sort: sort()
@@ -65,7 +49,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.groupSearches = data;
+                vm.houseUpdates = data;
                 vm.page = pagingParams.page;
             }
             function onError(error) {

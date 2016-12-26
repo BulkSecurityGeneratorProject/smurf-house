@@ -1,25 +1,23 @@
 package com.smurfhouse.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A House.
  */
 @Entity
 @Table(name = "house")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "house")
 public class House extends AbstractAuditingEntity implements Serializable {
 
@@ -78,7 +76,6 @@ public class House extends AbstractAuditingEntity implements Serializable {
 
     @OneToMany(mappedBy = "house")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PriceHouse> priceHouses = new HashSet<>();
 
     @ManyToOne

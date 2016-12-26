@@ -1,20 +1,20 @@
 <div>
-    <h2 translate="smurfHouseApp.groupSearch.home.title">Group Searches</h2>
+    <h2 translate="smurfHouseApp.houseUpdate.home.title">House Updates</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="group-search.new" >
+                <button class="btn btn-primary" ui-sref="house-update.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs"  translate="smurfHouseApp.groupSearch.home.createLabel">
-                        Create new Group Search
+                    <span class="hidden-xs"  translate="smurfHouseApp.houseUpdate.home.createLabel">
+                        Create new House Update
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smurfHouseApp.groupSearch.home.search' | translate }}">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smurfHouseApp.houseUpdate.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -36,45 +36,41 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="title"><span translate="smurfHouseApp.groupSearch.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="url"><span translate="smurfHouseApp.groupSearch.url">Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="provider"><span translate="smurfHouseApp.groupSearch.provider">Provider</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="maxLimitPrice"><span translate="smurfHouseApp.groupSearch.maxLimitPrice">Max Limit Price</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="activated"><span translate="smurfHouseApp.groupSearch.activated">Activated</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="operation"><span translate="smurfHouseApp.houseUpdate.operation">Operation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="update.updateDate"><span translate="smurfHouseApp.houseUpdate.update">Update</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="house.title"><span translate="smurfHouseApp.houseUpdate.house">House</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="groupSearch in vm.groupSearches track by groupSearch.id">
-                    <td><a ui-sref="group-search-detail({id:groupSearch.id})">{{groupSearch.id}}</a></td>
-                    <td>{{groupSearch.title}}</td>
-                    <td>{{groupSearch.url}}</td>
-                    <td translate="{{'smurfHouseApp.Provider.' + groupSearch.provider}}">{{groupSearch.provider}}</td>
-                    <td>{{groupSearch.maxLimitPrice}}</td>
-                    <td>{{groupSearch.activated}}</td>
+                <tr ng-repeat="houseUpdate in vm.houseUpdates track by houseUpdate.id">
+                    <td><a ui-sref="house-update-detail({id:houseUpdate.id})">{{houseUpdate.id}}</a></td>
+                    <td translate="{{'smurfHouseApp.HouseUpdateOperation.' + houseUpdate.operation}}">{{houseUpdate.operation}}</td>
+                    <td>
+                        <a ui-sref="update-detail({id:houseUpdate.update.id})">{{houseUpdate.update.updateDate}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="house-detail({id:houseUpdate.house.id})">{{houseUpdate.house.title}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="group-search-detail({id:groupSearch.id})"
+                                    ui-sref="house-update-detail({id:houseUpdate.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="group-search.edit({id:groupSearch.id})"
+                                    ui-sref="house-update.edit({id:houseUpdate.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="group-search.delete({id:groupSearch.id})"
+                                    ui-sref="house-update.delete({id:houseUpdate.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                            </button>
-                            <button type="button" ng-click="vm.refreshSync(groupSearch.id)"  class="btn btn-primary">
-                                <span class="glyphicon glyphicon-refresh"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.resync">Sync</span>
                             </button>
                         </div>
                     </td>
