@@ -22,10 +22,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing HouseUpdate.
@@ -35,13 +33,30 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class HouseUpdateResource {
 
     private final Logger log = LoggerFactory.getLogger(HouseUpdateResource.class);
-        
+
     @Inject
     private HouseUpdateRepository houseUpdateRepository;
-    
+
     @Inject
     private HouseUpdateSearchRepository houseUpdateSearchRepository;
-    
+
+    /**
+     * GET  /house-updates/byUpdate/{id} : get all the houseUpdates by update.id
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of houseUpdates in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @RequestMapping(value = "/house-updates/byUpdate/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<HouseUpdate>> getHouseUpdatesByUpdateId(@PathVariable Long id)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of HouseUpdates by update.id {} ", id);
+        List<HouseUpdate> houseUpdates = houseUpdateRepository.findAllByUpdateIdOrderByOperationAscHousePriceAsc(id);
+        return new ResponseEntity<>(houseUpdates, HttpStatus.OK);
+    }
+
     /**
      * POST  /house-updates : Create a new houseUpdate.
      *
@@ -104,7 +119,7 @@ public class HouseUpdateResource {
     public ResponseEntity<List<HouseUpdate>> getAllHouseUpdates(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of HouseUpdates");
-        Page<HouseUpdate> page = houseUpdateRepository.findAll(pageable); 
+        Page<HouseUpdate> page = houseUpdateRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/house-updates");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

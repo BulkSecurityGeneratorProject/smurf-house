@@ -1,8 +1,7 @@
 package com.smurfhouse.repository;
 
 import com.smurfhouse.domain.HouseUpdate;
-
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -11,5 +10,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface HouseUpdateRepository extends JpaRepository<HouseUpdate,Long> {
+
+    List<HouseUpdate> findAllByUpdateIdOrderByOperationAscHousePriceAsc (Long id);
 
 }

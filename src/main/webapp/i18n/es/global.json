@@ -6,7 +6,8 @@
             "home": "Inicio",
             "dashboards": {
                 "main":"Cuadro de Mando",
-                "market":"Mercado"
+                "market":"Mercado",
+                "updates":"Actualizaciones"
             },
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {

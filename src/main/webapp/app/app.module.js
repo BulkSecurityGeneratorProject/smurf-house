@@ -21,6 +21,7 @@
             'angular-loading-bar',
             'ui.select',
             'nvd3',
+            'angular.filter',
             'ngSanitize'
         ])
         .run(run);

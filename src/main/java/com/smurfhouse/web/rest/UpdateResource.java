@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,12 +21,11 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing Update.
@@ -35,13 +35,35 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class UpdateResource {
 
     private final Logger log = LoggerFactory.getLogger(UpdateResource.class);
-        
+
     @Inject
     private UpdateRepository updateRepository;
-    
+
     @Inject
     private UpdateSearchRepository updateSearchRepository;
-    
+
+
+    /**
+     * GET  /updates/{fromDate}/{toDate} : get a list of updates between the fromDate and toDate.
+     *
+     * @param fromDate the start of the time period of updates to get
+     * @param toDate the end of the time period of Updates to get
+     * @return the ResponseEntity with status 200 (OK) and the list of Updates in body
+     */
+    @RequestMapping(
+        value = "/updates/{fromDate}/{toDate}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Update>> getByDates(
+        @PathVariable(value = "fromDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
+        @PathVariable(value = "toDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate)  {
+
+        List<Update> lUpdates = updateRepository.findAllByUpdateDateBetweenOrderByUpdateDateDesc(fromDate, toDate);
+
+        return new ResponseEntity<>(lUpdates, HttpStatus.OK);
+    }
+
     /**
      * POST  /updates : Create a new update.
      *
@@ -104,7 +126,7 @@ public class UpdateResource {
     public ResponseEntity<List<Update>> getAllUpdates(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Updates");
-        Page<Update> page = updateRepository.findAll(pageable); 
+        Page<Update> page = updateRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/updates");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

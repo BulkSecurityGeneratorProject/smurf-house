@@ -10,6 +10,11 @@
         var resourceUrl =  'api/updates/:id';
 
         return $resource(resourceUrl, {}, {
+            'getUpdatesByDates': {
+            	method: 'GET',
+            	url:'api/updates/:fromDate/:toDate',
+            	isArray: true
+            },
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',

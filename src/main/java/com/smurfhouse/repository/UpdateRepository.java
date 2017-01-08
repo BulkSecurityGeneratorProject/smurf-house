@@ -3,7 +3,7 @@ package com.smurfhouse.repository;
 import com.smurfhouse.domain.Update;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -12,6 +12,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface UpdateRepository extends JpaRepository<Update,Long> {
 
-    List<Update> findAllByUpdateDateBetween(LocalDateTime fromDate, LocalDateTime toDate);
+    List<Update> findAllByUpdateDateBetweenOrderByUpdateDateDesc(LocalDate fromDate, LocalDate toDate);
 
 }

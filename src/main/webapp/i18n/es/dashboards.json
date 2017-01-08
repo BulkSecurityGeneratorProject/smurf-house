@@ -14,6 +14,14 @@
                     "priceMeter": "€/m2"
                 }
             },
+            "updates" : {
+                "title" : "Actualizaciones",
+                "filter" : {
+                    "title" : "Filtro por fecha",
+                    "from" : "Desde",
+                    "to" : "Hasta"
+                }
+            },
             "house": "House"
         }
     }

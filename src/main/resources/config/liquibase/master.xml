@@ -19,7 +19,7 @@
 
     <include file="classpath:config/liquibase/changelog/20160803202230_added_title_to_house.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160809191017_added_audits_fields.xml" relativeToChangelogFile="false"/>
-
+    <include file="classpath:config/liquibase/changelog/20170108192138_added_index_errorflag.xml" relativeToChangelogFile="false"/>
 
     <include file="classpath:config/liquibase/changelog/99999999999999_uploadstatic_data.xml" relativeToChangelogFile="false"/>
 

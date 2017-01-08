@@ -6,7 +6,8 @@
             "home": "Home",
             "dashboards": {
                 "main":"Dashboards",
-                "market":"Market"
+                "market":"Market",
+                "updates":"Updates"
             },
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {

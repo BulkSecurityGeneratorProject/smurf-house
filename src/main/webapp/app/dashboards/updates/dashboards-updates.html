@@ -1,0 +1,73 @@
+
+<h2 translate="smurfHouseApp.dashboards.updates.title">Updates</h2>
+
+<div class="row">
+    <div class="col-md-5">
+        <h4 translate="smurfHouseApp.dashboards.updates.filter.title">Filter by date</h4>
+        <p class="input-group">
+            <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.from">from</span>
+            <input type="date" class="input-sm form-control" name="start" ng-model="vm.fromDate" ng-change="vm.onChangeDate()" required/>
+            <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.to">to</span>
+            <input type="date" class="input-sm form-control" name="end" ng-model="vm.toDate" ng-change="vm.onChangeDate()" required/>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <dl ng-repeat="(key, value) in vm.updates | groupBy: 'updateDate'">
+            <dt>{{key}}</dt>
+            <dd ng-repeat="update in value">
+                <em>{{update.groupSearch.title}}</em>
+                <small>
+                    News <span class="badge">{{update.news}}</span> </span>
+                    Ended <span class="badge">{{update.deletes}}</span>
+                    Update price <span class="badge">{{update.priceUpdates}}</span>
+
+                    <span ng-show="update.error === true" class="label label-danger">Error in the update </span>
+                                      
+                </small>
+                <button type="submit"
+                        ng-show="update.error != true"
+                        ng-click="vm.showHouseUpdates(update.id)"
+                        class="btn btn-info btn-xs">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    <span class="hidden-xs hidden-xs" translate="ver"></span>
+                </button>
+            </dd>
+        </dl>
+    </div>
+
+
+    <div class="col-md-6">
+        <ul ng-repeat="houseUpdate in vm.houseUpdates" ng-show="vm.houseUpdates" >
+            <li>
+                <div>
+                    <span ng-show="houseUpdate.operation == 'NEW'">
+                        <i class="fa fa-plus-square" aria-hidden="true" uib-tooltip="New entry"></i>
+                    </span>
+                    <span ng-show="houseUpdate.operation == 'PRICEUPDATE'">
+                        <i class="fa fa-hand-o-up" aria-hidden="true" uib-tooltip="Updated price" ></i>
+                    </span>
+                    <span ng-show="houseUpdate.operation == 'DELETE'">
+                        <i class="fa fa-eraser" aria-hidden="true" uib-tooltip="house Ended" ></i>
+                    </span>
+                    <a ui-sref="house-detail({id:houseUpdate.house.id})">{{houseUpdate.house.title}}</a>                
+                </div>
+                <div>
+                    {{houseUpdate.house.price | currency:"€":0 }}
+                    &nbsp; 
+                    <small>{{houseUpdate.house.details}}</small>
+                    <a
+                        uib-tooltip="Access to {{houseUpdate.house.groupSearch.provider}}"
+                        ng-click="vm.openlink(houseUpdate.house.externalLink)">
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </a>                
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+</div>

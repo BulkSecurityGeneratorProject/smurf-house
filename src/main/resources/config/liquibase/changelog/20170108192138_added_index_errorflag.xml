@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="fmunozse (generated)" id="1483903306835-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <and>
+                    <indexExists indexName="INDX_UPDATE_UPDATEDATE"/>
+                </and>
+            </not>
+        </preConditions>
+        <createIndex indexName="INDX_UPDATE_UPDATEDATE" tableName="update">
+            <column name="update_date"/>
+        </createIndex>
+    </changeSet>
+
+   <changeSet author="fmunozse (generated)" id="1483903306835-8">
+       <addColumn tableName="update">
+           <column name="with_error" type="BOOLEAN"/>
+       </addColumn>
+   </changeSet>
+
+
+
+
+
+</databaseChangeLog>

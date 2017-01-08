@@ -17,7 +17,11 @@ import java.util.Objects;
  * A Update.
  */
 @Entity
-@Table(name = "update")
+@Table(name = "update",
+        indexes = {
+            @Index(name = "INDX_UPDATE_UPDATEDATE",  columnList="update_date", unique = false)
+        }
+)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "update")
 public class Update implements Serializable {
@@ -40,6 +44,9 @@ public class Update implements Serializable {
 
     @Column(name = "price_updates")
     private Integer priceUpdates;
+
+    @Column(name = "with_error")
+    private Boolean error;
 
     @ManyToOne
     private GroupSearch groupSearch;
@@ -103,6 +110,14 @@ public class Update implements Serializable {
 
     public void setHouseUpdates(Set<HouseUpdate> houseUpdates) {
         this.houseUpdates = houseUpdates;
+    }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
     @Override

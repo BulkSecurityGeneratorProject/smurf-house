@@ -53,6 +53,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/angular-bootstrap-slider/slider.js',
             'src/main/webapp/bower_components/angular-ui-select/dist/select.js',
             'src/main/webapp/bower_components/angular-nvd3/dist/angular-nvd3.js',
+            'src/main/webapp/bower_components/angular-filter/dist/angular-filter.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
             'src/main/webapp/bower_components/ng-switchery/src/ng-switchery.js',
             // endbower

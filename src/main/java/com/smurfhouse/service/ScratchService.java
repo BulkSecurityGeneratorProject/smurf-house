@@ -112,8 +112,7 @@ public class ScratchService {
             log.info("Not returned house doing scratching, could be issue, therefore, skipping the sync for groupSearch [{}] {} ",
                 groupsearch.getId(), groupsearch.getTitle());
 
-            //Updade tracker
-            //TODO indicate some field to report the issue
+            update.setError(true);
             updateRepository.save(update);
             return stats;
         }
