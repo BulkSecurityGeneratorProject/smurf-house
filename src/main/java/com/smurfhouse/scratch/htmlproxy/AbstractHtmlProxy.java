@@ -46,7 +46,7 @@ public abstract class AbstractHtmlProxy implements IHtmlProxy {
 
             try {
                 HtmlPage pageProxy = webClient.getPage( getUrlBaseProxy() );
-                log.log(Level.FINE, "Content of pageProxy {0}", pageProxy.asText() );
+                log.log(Level.FINE, "Content of pageProxy {0}", pageProxy.toString() );
 
                 Document doc = implementLogicByProxy(urlRequest, pageProxy, webClient);
                 log.log(Level.FINE, "Content of urlRequest {0}", doc.toString());

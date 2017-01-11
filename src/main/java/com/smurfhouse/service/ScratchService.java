@@ -9,6 +9,7 @@ import com.smurfhouse.scratch.model.ScratchHouse;
 import com.smurfhouse.web.rest.dto.StatsSincronyzeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,9 +44,10 @@ public class ScratchService {
     @Inject
     HouseUpdateRepository houseUpdateRepository;
 
-
+    @Scheduled(cron = "0 0 22 * * ?")
+    //@Scheduled(fixedRate = 60000)
     @Timed
-    public StatsSincronyzeDTO synchronizeAll () {
+    public void synchronizeAll () {
 
         StatsSincronyzeDTO totalStats = new StatsSincronyzeDTO ();
 
@@ -58,7 +60,7 @@ public class ScratchService {
             totalStats.houseNewPrice += stats.houseNewPrice;
         }
 
-        return totalStats;
+        log.info("synchronizeAll - total stats {} ", totalStats);
     }
 
     @Timed

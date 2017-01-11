@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -51,11 +50,13 @@ public class ManagerIdealista {
                     log.debug("adding : {} ", l);
 
                     //Check if max boundari
+                    /*
                     ScratchHouse lastHouse = l.get(l.size()-1);
                     if (new BigDecimal("300000").compareTo(lastHouse.getPrice()) < 0 ) {
                         log.debug("exit by max price : {} ", lastHouse.getPrice());
                         break;
                     }
+                    */
 
                     //next = proxy.getUrlBaseProxy() +  pageParsed.getNextUrl();
                     next =  pageParsed.getNextUrl();
