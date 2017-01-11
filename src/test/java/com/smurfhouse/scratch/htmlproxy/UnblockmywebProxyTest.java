@@ -4,6 +4,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.smurfhouse.scratch.util.UtilScratch;
 import org.jsoup.nodes.Document;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertNotNull;
 public class UnblockmywebProxyTest {
     public static final String  URL_REQUEST = "http://www.google.es";
 
+    @Ignore
     @Test
     public void implementLogicByProxy() throws Exception {
 
