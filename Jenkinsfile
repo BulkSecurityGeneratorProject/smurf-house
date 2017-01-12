@@ -18,8 +18,15 @@ node {
     stage 'clean'
     sh "./mvnw clean"
 
+
     stage 'backend tests'
-    sh "./mvnw test"
+    try {
+        sh "./mvnw test"
+
+    } finally {
+       step([$class: 'JUnitResultArchiver', testResults: '**/TEST-*.xml'])
+    }
+
 
     stage 'frontend tests'
     sh "gulp test"
