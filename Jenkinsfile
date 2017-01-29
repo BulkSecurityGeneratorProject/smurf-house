@@ -6,6 +6,10 @@ node {
     stage('check tools') {
         echo "Running ${env.BUILD_TAG} ${env.BUILD_ID} - ${env.BUILD_DISPLAY_NAME} on ${env.BUILD_URL}  ...  ${env.JENKINS_URL}. JobName: ${env.JOB_NAME} - ${env.JOB_URL}"
 
+        sh 'git rev-parse HEAD > GIT_COMMIT'
+        def commitNumber = readFile('GIT_COMMIT').trim()
+        echo "commitNumber: ${commitNumber}""
+
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
