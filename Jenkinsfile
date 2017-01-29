@@ -53,6 +53,7 @@ node {
 
     stage('creating docker') {
         sh "./mvnw -Pprod docker:build"
+        sh "docker push fmunozse/smurfhouse"
     }
 
 
