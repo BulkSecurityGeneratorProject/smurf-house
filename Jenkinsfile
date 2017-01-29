@@ -3,9 +3,9 @@ node {
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
 
-    echo "Running ${env.BUILD_ID} - ${env.BUILD_NUMBER} on ${env.JENKINS_URL}. JobName: ${env.JOB_NAME} - ${env.JOB_URL}"
-
     stage('check tools') {
+        echo "Running ${env.BUILD_ID} - ${env.BUILD_NUMBER} on ${env.JENKINS_URL}. JobName: ${env.JOB_NAME} - ${env.JOB_URL}"
+
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
