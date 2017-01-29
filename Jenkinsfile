@@ -3,7 +3,7 @@ node {
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
 
-    echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+    echo "Running ${env.BUILD_ID} - ${env.BUILD_NUMBER} on ${env.JENKINS_URL}. JobName: ${JOB_NAME} - ${JOB_URL}"
 
     stage('check tools') {
         sh "node -v"
@@ -11,8 +11,6 @@ node {
         sh "bower -v"
         sh "gulp -v"
     }
-
-    echo "Build: ${BUILD}"
 
     stage('checkout') {
         checkout scm
