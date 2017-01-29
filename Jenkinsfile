@@ -8,7 +8,7 @@ node {
 
         sh 'git rev-parse HEAD > GIT_COMMIT'
         def commitNumber = readFile('GIT_COMMIT').trim()
-        echo "commitNumber: ${commitNumber}""
+        echo "commitNumber: ${commitNumber}"
 
         sh "node -v"
         sh "npm -v"
