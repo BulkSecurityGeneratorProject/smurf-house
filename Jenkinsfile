@@ -1,3 +1,7 @@
+echo "Branch name: ${BRANCH_NAME}"
+BUILD = BRANCH_NAME == 'master' ? 'latest' : BRANCH_NAME
+echo "Build: ${BUILD}"
+
 node {
     // uncomment these 2 lines and edit the name 'node-4.4.7' according to what you choose in configuration
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
@@ -9,6 +13,8 @@ node {
         sh "bower -v"
         sh "gulp -v"
     }
+
+    echo "Build: ${BUILD}"
 
     stage('checkout') {
         checkout scm
@@ -47,5 +53,11 @@ node {
     stage('packaging') {
         sh "./mvnw package -Pprod -DskipTests"
     }
+
+
+    stage('creating docker') {
+        sh "./mvnw -Pprod docker:build"
+    }
+
 
 }
