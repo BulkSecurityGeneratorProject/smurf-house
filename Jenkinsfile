@@ -4,10 +4,7 @@ node {
     env.PATH = "${nodeHome}/bin:${env.PATH}"
 
     stage('check tools') {
-        echo "Running ${env.BUILD_ID} - ${env.BUILD_NUMBER} on ${env.JENKINS_URL}. JobName: ${env.JOB_NAME} - ${env.JOB_URL}"
-
-        docker.build('demo')
-
+        echo "Running ${env.BUILD_TAG} ${env.BUILD_ID} - ${env.BUILD_DISPLAY_NAME} on ${env.BUILD_URL}  ...  ${env.JENKINS_URL}. JobName: ${env.JOB_NAME} - ${env.JOB_URL}"
 
         sh "node -v"
         sh "npm -v"
