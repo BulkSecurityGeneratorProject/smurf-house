@@ -1,11 +1,9 @@
-echo "Branch name: ${BRANCH_NAME}"
-BUILD = BRANCH_NAME == 'master' ? 'latest' : BRANCH_NAME
-echo "Build: ${BUILD}"
-
 node {
     // uncomment these 2 lines and edit the name 'node-4.4.7' according to what you choose in configuration
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
+
+    echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 
     stage('check tools') {
         sh "node -v"
