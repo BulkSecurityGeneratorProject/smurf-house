@@ -57,7 +57,14 @@ node {
 
     stage('creating docker') {
         sh "./mvnw -Pprod docker:build"
-        sh "docker push fmunozse/smurfhouse"
+
+
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER_FMUNOZSE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+            sh "echo uname=$USERNAME pwd=$PASSWORD"
+            sh "docker login --username $USERNAME --password $PASSWORD"
+            sh "docker push fmunozse/smurfhouse"
+        }
+
     }
 
 
