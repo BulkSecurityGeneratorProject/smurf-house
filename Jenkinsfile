@@ -6,6 +6,10 @@ node {
     stage('check tools') {
         echo "Running ${env.BUILD_TAG} ${env.BUILD_ID} - ${env.BUILD_DISPLAY_NAME} on ${env.BUILD_URL}  ...  ${env.JENKINS_URL}. JobName: ${env.JOB_NAME} - ${env.JOB_URL}"
 
+        echo "\u2600 BUILD_URL=${env.BUILD_URL}"
+        def workspace = pwd()
+        echo "\u2600 workspace=${workspace}"
+
         sh 'git rev-parse HEAD > GIT_COMMIT'
         def commitNumber = readFile('GIT_COMMIT').trim()
         echo "commitNumber: ${commitNumber}"
@@ -54,6 +58,18 @@ node {
         sh "./mvnw package -Pprod -DskipTests"
     }
 
+    stage ('dockertest') {
+        timeout(time: 1, unit: 'HOURS') {
+          input 'Deploy to Production?'
+        }
+    }
+
+    stage ('docker?') {
+        generateDocker = input message: 'Generate docker version and push?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'name sadadasd']]
+        if (reconfigure == true) {
+
+        }
+    }
 
     stage('creating docker') {
         sh "./mvnw -Pprod docker:build"
