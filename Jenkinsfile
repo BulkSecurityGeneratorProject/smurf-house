@@ -60,26 +60,18 @@ node {
 
     stage ('dockertest') {
         timeout(time: 1, unit: 'HOURS') {
-          input 'Deploy to Production?'
-        }
-    }
-
-    stage ('docker?') {
-        generateDocker = input message: 'Generate docker version and push?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'name sadadasd']]
-        if (reconfigure == true) {
-
+          input 'Generate docker version and push?'
         }
     }
 
     stage('creating docker') {
         sh "./mvnw -Pprod docker:build"
 
-
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER_FMUNOZSE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            sh "echo uname=$USERNAME pwd=$PASSWORD"
             sh "docker login --username $USERNAME --password $PASSWORD"
-            sh "docker push fmunozse/smurfhouse"
         }
+
+        sh "docker push fmunozse/smurfhouse"
 
     }
 
