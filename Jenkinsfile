@@ -58,7 +58,7 @@ node {
         sh "./mvnw package -Pprod -DskipTests"
     }
 
-    stage ('dockertest') {
+    stage ('docker?') {
         timeout(time: 1, unit: 'HOURS') {
           input 'Generate docker version and push?'
         }
@@ -67,11 +67,13 @@ node {
     stage('creating docker') {
         sh "./mvnw -Pprod docker:build"
 
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER_FMUNOZSE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER_USERPWD', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh "docker login --username $USERNAME --password $PASSWORD"
         }
 
-        sh "docker push fmunozse/smurfhouse"
+        echo "pushing to ${DOCKER_IMAGE}"
+
+        sh "docker push ${DOCKER_IMAGE}"
 
     }
 
