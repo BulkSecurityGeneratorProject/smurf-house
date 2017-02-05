@@ -9,14 +9,12 @@ node {
     def workspace = pwd();
     def dockerTag = "${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
 
-    echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}"
-
-    stage('check tools') {
+    stage('info And check tools') {
+        echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}. BranchName: ${env.BRANCH_NAME}"
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
         sh "gulp -v"
-
     }
 
     stage('checkout') {
@@ -72,6 +70,8 @@ node {
 
         echo "pushing to ${DOCKER_IMAGE}:latest"
         sh "docker push ${DOCKER_IMAGE}:latest"
+
+        sh "docker tag ${DOCKER_IMAGE}:latest ${dockerTag}"
 
         echo "pushing to ${dockerTag}"
         sh "docker push ${dockerTag}"
