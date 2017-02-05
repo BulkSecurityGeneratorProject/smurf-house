@@ -10,6 +10,8 @@ node {
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
 
+    deleteDir()
+
     sh 'git rev-parse HEAD > GIT_COMMIT'
     def commitNumber = readFile('GIT_COMMIT').trim()
     def pomv = version();
