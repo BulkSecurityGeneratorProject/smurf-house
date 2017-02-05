@@ -40,7 +40,7 @@ node {
     }
 
     stage ('Set Version') {
-        git checkout "${workspace}/pom.xml"
+        sh "git checkout ${workspace}/pom.xml"
         sh "./mvnw -B versions:set -DgenerateBackupPoms=false -DnewVersion=${buildVersion}"
 
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
