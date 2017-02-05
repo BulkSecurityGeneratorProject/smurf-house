@@ -10,7 +10,7 @@ node {
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
 
-    deleteDir()
+    //deleteDir()
 
     sh 'git rev-parse HEAD > GIT_COMMIT'
     def commitNumber = readFile('GIT_COMMIT').trim()
@@ -40,6 +40,7 @@ node {
     }
 
     stage ('Set Version') {
+        git checkout "${workspace}/pom.xml"
         sh "./mvnw -B versions:set -DgenerateBackupPoms=false -DnewVersion=${buildVersion}"
 
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
