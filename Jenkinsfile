@@ -42,18 +42,6 @@ node {
     stage ('Set Version') {
         sh "git checkout ${workspace}/pom.xml"
         sh "./mvnw -B versions:set -DgenerateBackupPoms=false -DnewVersion=${buildVersion}"
-
-        withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                      credentialsId: credentialsId_git,
-                      usernameVariable: 'GIT_USERNAME',
-                      passwordVariable: 'GIT_PASSWORD']]) {
-
-            sh "git config user.email '${GIT_USER_EMAIL}'"
-            sh "git config user.name '${GIT_USER_NAME}'"
-            sh "git tag -a ${buildVersion} -m 'Raise version ${buildVersion}'"
-            sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${GIT_PROJECT} --tags"
-
-        }
     }
 
 
@@ -82,9 +70,23 @@ node {
         sh "./mvnw package -Pprod -DskipTests"
     }
 
-    stage ('docker?') {
+    stage ('versioning and docker?') {
         timeout(time: 1, unit: 'HOURS') {
           input 'Generate docker version and push?'
+        }
+    }
+
+    stage ('Set GitHub Version') {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                      credentialsId: credentialsId_git,
+                      usernameVariable: 'GIT_USERNAME',
+                      passwordVariable: 'GIT_PASSWORD']]) {
+
+            sh "git config user.email '${GIT_USER_EMAIL}'"
+            sh "git config user.name '${GIT_USER_NAME}'"
+            sh "git tag -a ${buildVersion} -m 'Raise version ${buildVersion}'"
+            sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${GIT_PROJECT} --tags"
+
         }
     }
 
