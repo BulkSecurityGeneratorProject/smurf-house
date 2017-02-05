@@ -3,19 +3,15 @@ node {
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
 
+    sh 'git rev-parse HEAD > GIT_COMMIT'
+    def commitNumber = readFile('GIT_COMMIT').trim()
+    def pomv = version();
+    def workspace = pwd();
+    def dockerTag = "${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
+
+    echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}"
+
     stage('check tools') {
-
-        sh 'git rev-parse HEAD > GIT_COMMIT'
-        def commitNumber = readFile('GIT_COMMIT').trim()
-        def pomv = version();
-        def workspace = pwd();
-        def dockerTag = "${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
-
-
-        echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}"
-
-
-
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
