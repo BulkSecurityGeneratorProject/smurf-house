@@ -4,27 +4,19 @@ node {
     env.PATH = "${nodeHome}/bin:${env.PATH}"
 
     stage('check tools') {
-        echo "Running ${env.BUILD_TAG} ${env.BUILD_ID} - ${env.BUILD_DISPLAY_NAME} on ${env.BUILD_URL}  ...  ${env.JENKINS_URL}. JobName: ${env.JOB_NAME} - ${env.JOB_URL}"
-
-        echo "\u2600 BUILD_URL=${env.BUILD_URL}"
-        def workspace = pwd()
-        echo "\u2600 workspace=${workspace}"
 
         sh 'git rev-parse HEAD > GIT_COMMIT'
         def commitNumber = readFile('GIT_COMMIT').trim()
-        echo "commitNumber: ${commitNumber}"
+        def pomv = version();
+        def workspace = pwd()
+
+        echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}"
+
 
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
         sh "gulp -v"
-
-
-        def pomv = version();
-
-        echo "pomv: ${pomv}"
-
-        echo "stop ${aaaaa}"
 
     }
 
@@ -79,16 +71,20 @@ node {
             sh "docker login --username $USERNAME --password $PASSWORD"
         }
 
-        echo "pushing to ${DOCKER_IMAGE}"
+        echo "pushing to ${DOCKER_IMAGE}:latest"
+        sh "docker push ${DOCKER_IMAGE}:latest"
 
-        sh "docker push ${DOCKER_IMAGE}"
+        echo "pushing to ${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
+        sh "docker push ${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
+
+
 
     }
 
 
 }
 
-
+//getting the 2º tag <version>
 def version() {
     String path = pwd();
     def matcher = readFile("${path}/pom.xml") =~ '<version>(.+)</version>'
