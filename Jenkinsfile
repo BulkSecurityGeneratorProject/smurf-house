@@ -45,10 +45,10 @@ node {
                       usernameVariable: 'GIT_USERNAME',
                       passwordVariable: 'GIT_PASSWORD']]) {
 
-            sh 'git config user.email "${GIT_USER_EMAIL}"'
-            sh 'git config user.name "${GIT_USER_NAME}" '
-            sh 'git tag -a ${buildVersion} -m "Raise version ${buildVersion}" '
-            sh 'git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${GIT_PROJECT} --tags '
+            sh "git config user.email '${GIT_USER_EMAIL}'"
+            sh "git config user.name '${GIT_USER_NAME}'"
+            sh "git tag -a ${buildVersion} -m 'Raise version ${buildVersion}'"
+            sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${GIT_PROJECT} --tags"
 
         }
     }
