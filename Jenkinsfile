@@ -18,6 +18,14 @@ node {
         sh "npm -v"
         sh "bower -v"
         sh "gulp -v"
+
+        def project = new XmlSlurper().parseText(readFile('pom.xml'))
+        def pomv = project.version.text()
+
+        echo "pomv: ${pomv}"
+
+        echo "stop ${aaaaa}"
+
     }
 
     stage('checkout') {
