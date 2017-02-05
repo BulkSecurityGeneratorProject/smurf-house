@@ -8,10 +8,13 @@ node {
         sh 'git rev-parse HEAD > GIT_COMMIT'
         def commitNumber = readFile('GIT_COMMIT').trim()
         def pomv = version();
-        def workspace = pwd()
+        def workspace = pwd();
+        def dockerTag = "${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
 
-        echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}"
 
+        echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}"
+
+        echo "${aaa}"
 
         sh "node -v"
         sh "npm -v"
