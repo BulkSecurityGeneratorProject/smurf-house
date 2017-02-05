@@ -47,7 +47,7 @@ node {
 
             sh 'git config user.email ${repositoryCommiterEmail}'
             sh 'git config user.name "${repositoryCommiterUsername}" '
-            sh 'git tag -a ${buildVersion} -m 'Raise version ${buildVersion} '
+            sh 'git tag -a ${buildVersion} -m "Raise version ${buildVersion}" '
             sh 'git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${GIT_PROJECT} --tags '
 
         }
