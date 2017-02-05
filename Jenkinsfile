@@ -14,7 +14,7 @@ node {
 
         echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}"
 
-        echo "${aaa}"
+
 
         sh "node -v"
         sh "npm -v"
@@ -77,10 +77,8 @@ node {
         echo "pushing to ${DOCKER_IMAGE}:latest"
         sh "docker push ${DOCKER_IMAGE}:latest"
 
-        echo "pushing to ${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
-        sh "docker push ${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
-
-
+        echo "pushing to ${dockerTag}"
+        sh "docker push ${dockerTag}"
 
     }
 
