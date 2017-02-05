@@ -1,3 +1,10 @@
+def DOCKER_IMAGE="fmunozse/smurfhouse"
+def GIT_PROJECT="github.com/fmunozse/smurf-house.git"
+def GIT_USER_EMAIL="ci.fmunoze@gmail.com"
+def GIT_USER_NAME="ci-fmunozse"
+def credentialsId_git = "GIT_USERPWD"
+def credentialsId_docker = "DOCKER_USERPWD"
+
 node {
     // uncomment these 2 lines and edit the name 'node-4.4.7' according to what you choose in configuration
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
@@ -32,9 +39,18 @@ node {
 
     stage ('Set Version') {
         sh "./mvnw -B versions:set -DgenerateBackupPoms=false -DnewVersion=${buildVersion}"
-        sh 'git add .'
-        sh "git commit -m 'Raise version'"
-        sh "git tag v${buildVersion}"
+
+        withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                      credentialsId: credentialsId_git,
+                      usernameVariable: 'GIT_USERNAME',
+                      passwordVariable: 'GIT_PASSWORD']]) {
+
+            sh 'git config user.email ${repositoryCommiterEmail}'
+            sh 'git config user.name "${repositoryCommiterUsername}" '
+            sh 'git tag -a ${buildVersion} -m 'Raise version ${buildVersion} '
+            sh 'git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@${GIT_PROJECT} --tags '
+
+        }
     }
 
 
@@ -72,7 +88,7 @@ node {
     stage('creating docker') {
         sh "./mvnw -Pprod docker:build"
 
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER_USERPWD', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId_docker, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh "docker login --username $USERNAME --password $PASSWORD"
         }
 
