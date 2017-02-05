@@ -19,8 +19,8 @@ node {
         sh "bower -v"
         sh "gulp -v"
 
-        def project = new XmlSlurper().parseText(readFile('pom.xml'))
-        def pomv = project.version.text()
+
+        def pomv = version();
 
         echo "pomv: ${pomv}"
 
@@ -86,4 +86,11 @@ node {
     }
 
 
+}
+
+
+def version() {
+    String path = pwd();
+    def matcher = readFile("${path}/pom.xml") =~ '<version>(.+)</version>'
+    return matcher ? matcher[0][1] : null
 }
