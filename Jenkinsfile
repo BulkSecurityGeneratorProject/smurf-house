@@ -7,10 +7,11 @@ node {
     def commitNumber = readFile('GIT_COMMIT').trim()
     def pomv = version();
     def workspace = pwd();
-    def dockerTag = "${DOCKER_IMAGE}:${pomv}_${env.BUILD_ID}"
+    def buildVersion = "${pomv}_${env.BUILD_ID}"
+    def dockerTag = "${DOCKER_IMAGE}:${buildVersion}"
 
     stage('info And check tools') {
-        echo "Running ${pomv}_${env.BUILD_ID} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}. BranchName: ${env.BRANCH_NAME}"
+        echo "Running ${buildVersion} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}. BranchName: ${env.BRANCH_NAME}"
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
@@ -27,6 +28,13 @@ node {
 
     stage('clean') {
         sh "./mvnw clean"
+    }
+
+    stage ('Set Version') {
+        sh "./mvnw -B versions:set -DgenerateBackupPoms=false -DnewVersion=${buildVersion}"
+        sh 'git add .'
+        sh "git commit -m 'Raise version'"
+        sh "git tag v${buildVersion}"
     }
 
 
