@@ -92,5 +92,5 @@ node {
 def version() {
     String path = pwd();
     def matcher = readFile("${path}/pom.xml") =~ '<version>(.+)</version>'
-    return matcher ? matcher[0][1] : null
+    return matcher ? matcher[0][2] : null
 }
