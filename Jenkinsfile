@@ -45,6 +45,7 @@ node {
                       usernameVariable: 'GIT_USERNAME',
                       passwordVariable: 'GIT_PASSWORD']]) {
 
+            sh 'git status '
             sh 'git config user.email ${repositoryCommiterEmail}'
             sh 'git config user.name "${repositoryCommiterUsername}" '
             sh 'git tag -a ${buildVersion} -m "Raise version ${buildVersion}" '
