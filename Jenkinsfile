@@ -9,18 +9,11 @@ node {
     // uncomment these 2 lines and edit the name 'node-4.4.7' according to what you choose in configuration
     def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
-
-    //deleteDir()
-
-    sh 'git rev-parse HEAD > GIT_COMMIT'
-    def commitNumber = readFile('GIT_COMMIT').trim()
-    def pomv = version();
     def workspace = pwd();
-    def buildVersion = "${pomv}_${env.BUILD_ID}"
-    def dockerTag = "${DOCKER_IMAGE}:${buildVersion}"
+
 
     stage('info And check tools') {
-        echo "Running ${buildVersion} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}. BranchName: ${env.BRANCH_NAME}"
+
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
@@ -37,10 +30,18 @@ node {
 
     stage('clean') {
         sh "./mvnw clean"
+        sh "git checkout ${workspace}/pom.xml"
     }
 
+    //versions
+    sh 'git rev-parse HEAD > GIT_COMMIT'
+    def commitNumber = readFile('GIT_COMMIT').trim()
+    def pomv = version();
+    def buildVersion = "${pomv}_${env.BUILD_ID}"
+    def dockerTag = "${DOCKER_IMAGE}:${buildVersion}"
+
     stage ('Set Version') {
-        sh "git checkout ${workspace}/pom.xml"
+        echo "Running ${buildVersion} - CommitNumber: ${commitNumber} on ${workspace}. dockerTag: ${dockerTag}. BranchName: ${env.BRANCH_NAME}"
         sh "./mvnw -B versions:set -DgenerateBackupPoms=false -DnewVersion=${buildVersion}"
     }
 
