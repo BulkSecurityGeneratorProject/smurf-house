@@ -11,9 +11,7 @@ node {
     env.PATH = "${nodeHome}/bin:${env.PATH}"
     def workspace = pwd();
 
-
-    stage('info And check tools') {
-
+    stage('check tools') {
         sh "node -v"
         sh "npm -v"
         sh "bower -v"
