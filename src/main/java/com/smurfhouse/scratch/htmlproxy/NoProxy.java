@@ -2,7 +2,6 @@ package com.smurfhouse.scratch.htmlproxy;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
@@ -24,8 +23,8 @@ public class NoProxy extends AbstractHtmlProxy {
 
 
     @Override
-    protected Document implementLogicByProxy(String urlRequest, HtmlPage pageProxy, WebClient webClient) throws IOException {
-        return getPage(urlRequest);
+    protected HtmlPage implementLogicByProxy(String urlRequest, HtmlPage pageProxy, WebClient webClient) throws IOException {
+        return pageProxy;
     }
 
 

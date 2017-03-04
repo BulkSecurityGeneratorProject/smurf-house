@@ -11,13 +11,13 @@ import java.io.IOException;
 /**
  * Created by fmunozse on 6/7/16.
  */
-public class NewipnowProxy extends AbstractHtmlProxy {
+public class ProxySite extends AbstractHtmlProxy {
 
-    private static final String URL_PROXY = "http://newipnow.com/";
+    private static final String URL_PROXY = "https://www.proxysite.com/es";
 
     protected WebClient webClient;
 
-    public NewipnowProxy() {
+    public ProxySite() {
     }
 
     @Override
@@ -28,7 +28,7 @@ public class NewipnowProxy extends AbstractHtmlProxy {
     protected HtmlPage implementLogicByProxy (String urlRequest, HtmlPage pageProxy, WebClient webClient) throws IOException {
 
         final HtmlForm form = pageProxy.getForms().get(0);
-        final HtmlTextInput textField = form.getInputByName("nin_u");
+        final HtmlTextInput textField = form.getInputByName("d");
 
         // Change the value of the text field
         textField.setValueAttribute(urlRequest + "\n");
@@ -49,5 +49,7 @@ public class NewipnowProxy extends AbstractHtmlProxy {
 
         return pageIdealista;
     }
+
+
 
 }

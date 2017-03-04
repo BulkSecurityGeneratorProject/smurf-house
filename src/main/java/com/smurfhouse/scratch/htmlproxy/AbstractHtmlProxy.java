@@ -27,7 +27,6 @@ public abstract class AbstractHtmlProxy implements IHtmlProxy {
         webClient = null;
     }
 
-
     public abstract String getUrlBaseProxy ();
 
     @Override
@@ -38,6 +37,8 @@ public abstract class AbstractHtmlProxy implements IHtmlProxy {
         if (urlRequest == null)
             return null;
 
+        HtmlPage pageIdealista = null;
+
         //In case detect first access ... them create webClient and implement the logic to pass by proxyPage
         if (webClient == null) {
             log.log(Level.FINE, "Detected first access to {0}. Create webClient", urlRequest );
@@ -46,32 +47,34 @@ public abstract class AbstractHtmlProxy implements IHtmlProxy {
 
             try {
                 HtmlPage pageProxy = webClient.getPage( getUrlBaseProxy() );
-                log.log(Level.FINE, "Content of pageProxy {0}", pageProxy.toString() );
+                log.log(Level.FINE, "Content of pageProxy {0}", pageProxy.asXml() );
 
-                Document doc = implementLogicByProxy(urlRequest, pageProxy, webClient);
-                log.log(Level.FINE, "Content of urlRequest {0}", doc.toString());
 
-                return doc;
+                pageIdealista= implementLogicByProxy(urlRequest, pageProxy, webClient);
+                log.log(Level.FINE, "Content of urlRequest {0}", pageIdealista.asXml());
 
             } catch (IOException e) {
                 close();
                 throw e;
             }
-        }
+        } else {
 
-        HtmlPage pageIdealista = null;
-        try {
-            pageIdealista = webClient.getPage(urlRequest);
-            log.log(Level.FINE, "Content of urlRequest {0}", pageIdealista.asText() );
-        } catch (IOException e) {
-            close();
-            throw e;
+            try {
+
+                pageIdealista = webClient.getPage(urlRequest);
+                log.log(Level.FINE, "Content of urlRequest {0}", pageIdealista.asXml());
+
+            } catch (IOException e) {
+                close();
+                throw e;
+            }
+
         }
 
         return Jsoup.parse(pageIdealista.asXml());
 
     }
 
-    protected abstract Document implementLogicByProxy (String urlRequest, HtmlPage pageProxy,  WebClient webClient) throws IOException;
+    protected abstract HtmlPage implementLogicByProxy (String urlRequest, HtmlPage pageProxy,  WebClient webClient) throws IOException;
 
 }

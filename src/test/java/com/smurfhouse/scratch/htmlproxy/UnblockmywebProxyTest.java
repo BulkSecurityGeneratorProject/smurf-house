@@ -3,6 +3,7 @@ package com.smurfhouse.scratch.htmlproxy;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.smurfhouse.scratch.util.UtilScratch;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -28,7 +29,9 @@ public class UnblockmywebProxyTest {
         try {
             HtmlPage pageProxy = webClient.getPage( htmlproxy.getUrlBaseProxy() );
 
-            Document doc = htmlproxy.implementLogicByProxy(URL_REQUEST, pageProxy, webClient);
+            HtmlPage page = htmlproxy.implementLogicByProxy(URL_REQUEST, pageProxy, webClient);
+            Document doc = Jsoup.parse(page.asXml());
+
             assertNotNull(doc);
             assertEquals(doc.title(), "Google");
 

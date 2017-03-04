@@ -1,7 +1,7 @@
 package com.smurfhouse.scratch;
 
 import com.smurfhouse.scratch.htmlproxy.IHtmlProxy;
-import com.smurfhouse.scratch.htmlproxy.NewipnowProxy;
+import com.smurfhouse.scratch.htmlproxy.ProxySite;
 import com.smurfhouse.scratch.model.PageParsed;
 import com.smurfhouse.scratch.model.ScratchHouse;
 import com.smurfhouse.scratch.scratch.IdealistaScratch;
@@ -31,7 +31,7 @@ public class ManagerIdealista {
     public List<ScratchHouse> getAllHouse (String url, Locale locale) {
 
         List<ScratchHouse> houses = new LinkedList<>();
-        IHtmlProxy proxy = new NewipnowProxy();
+        IHtmlProxy proxy = new ProxySite();
         IdealistaScratch scratch = new IdealistaScratch();
 
         Document doc = null;
@@ -59,8 +59,15 @@ public class ManagerIdealista {
                     */
 
                     //next = proxy.getUrlBaseProxy() +  pageParsed.getNextUrl();
-                    next =  pageParsed.getNextUrl();
-                    log.info("Nex page: {} ", next);
+                    next =  proxy.getUrlBaseProxy() +  pageParsed.getNextUrl();
+
+                    log.info("Next page: {} - waiting 10s ", next);
+                    try {
+                        Thread.sleep(10000);
+
+                    } catch (InterruptedException e) {
+                    }
+                    log.info("Next page: {} - waiting 10s ", next);
                 }
 
             } while (pageParsed.getNextUrl() != null);

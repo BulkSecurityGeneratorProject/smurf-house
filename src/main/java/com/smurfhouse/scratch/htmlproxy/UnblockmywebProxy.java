@@ -5,8 +5,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
@@ -27,7 +25,7 @@ public class UnblockmywebProxy extends AbstractHtmlProxy {
         return URL_UNBLOCKEDMYWEB_PROXY;
     }
 
-    protected Document implementLogicByProxy (String urlRequest, HtmlPage pageProxy, WebClient webClient) throws IOException {
+    protected HtmlPage implementLogicByProxy (String urlRequest, HtmlPage pageProxy, WebClient webClient) throws IOException {
 
         final HtmlForm form = pageProxy.getForms().get(0);
         final HtmlSubmitInput button = form.getInputByValue("Go!");
@@ -45,7 +43,7 @@ public class UnblockmywebProxy extends AbstractHtmlProxy {
             throw e;
         }
 
-        return Jsoup.parse(pageIdealista.asXml());
+        return pageIdealista;
     }
 
 }
