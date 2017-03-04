@@ -5,6 +5,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.smurfhouse.scratch.util.UtilScratch;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class NoProxyTest {
 
     private static final String  URL_REQUEST = "http://www.google.es";
 
+    @Ignore
     @Test
     public void implementLogicByProxy() throws Exception {
 
