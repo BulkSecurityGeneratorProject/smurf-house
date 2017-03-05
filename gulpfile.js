@@ -22,7 +22,9 @@ var gulp = require('gulp'),
     inject = require('gulp-inject'),
     angularFilesort = require('gulp-angular-filesort'),
     naturalSort = require('gulp-natural-sort'),
-    bowerFiles = require('main-bower-files');
+    bowerFiles = require('main-bower-files'),
+    debug = require('gulp-debug');
+
 
 var handleErrors = require('./gulp/handleErrors'),
     serve = require('./gulp/serve'),
@@ -38,7 +40,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('copy', function () {
-    return es.merge( 
+    return es.merge(
         gulp.src(config.app + 'i18n/**')
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist + 'i18n/'))
@@ -67,7 +69,13 @@ gulp.task('copy', function () {
         gulp.src([config.app + 'robots.txt', config.app + 'favicon.ico', config.app + '.htaccess'], { dot: true })
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist))
-        .pipe(gulp.dest(config.dist))
+        .pipe(gulp.dest(config.dist)),
+
+        gulp.src(config.bower + 'font-awesome/fonts/*.*')
+            .pipe(plumber({errorHandler: handleErrors}))
+            //.pipe(changed(config.dist + 'content/fonts/'))
+            .pipe(gulp.dest(config.dist + 'content/fonts/'))
+            .pipe(debug())
     );
 });
 

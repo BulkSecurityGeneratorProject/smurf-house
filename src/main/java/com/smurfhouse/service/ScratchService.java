@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.smurfhouse.domain.*;
 import com.smurfhouse.domain.enumeration.HouseUpdateOperation;
 import com.smurfhouse.repository.*;
+import com.smurfhouse.repository.search.HouseSearchRepository;
 import com.smurfhouse.scratch.ManagerIdealista;
 import com.smurfhouse.scratch.model.ScratchHouse;
 import com.smurfhouse.web.rest.dto.StatsSincronyzeDTO;
@@ -33,6 +34,9 @@ public class ScratchService {
     HouseRepository houseRepository;
 
     @Inject
+    HouseSearchRepository houseSearchRepository;
+
+    @Inject
     GroupSearchRepository groupSearchRepository;
 
     @Inject
@@ -44,9 +48,8 @@ public class ScratchService {
     @Inject
     HouseUpdateRepository houseUpdateRepository;
 
-    @Scheduled(cron = "0 0 22 * * ?")
-    //@Scheduled(fixedRate = 60000)
     @Timed
+    @Scheduled(cron = "0 0 22 * * ?")
     public void synchronizeAll () {
 
         StatsSincronyzeDTO totalStats = new StatsSincronyzeDTO ();
@@ -138,7 +141,9 @@ public class ScratchService {
                     PriceHouse priceHouse = createPriceHouse(actualPrice,house);
                     house.getPriceHouses().add(priceHouse);
 
-                    houseRepository.save(house);
+                    house = houseRepository.save(house);
+                    houseSearchRepository.save(house);
+
                     stats.houseNewPrice++;
                     //priceHouseRepository.save(priceHouse);
                     log.info("House {}-{} has new price {} ", house.getId(), house.getTitle(), actualPrice);
@@ -163,7 +168,10 @@ public class ScratchService {
                 prices.add(priceHouse);
                 house.setPriceHouses(prices);
 
-                houseRepository.save(house);
+                house = houseRepository.save(house);
+                houseSearchRepository.save(house);
+
+
                 stats.houseAdded ++ ;
                 log.info("New House added {}-{} with price: :  ", house.getId(), house.getTitle(), house.getPrice());
                 log.debug("    House added {} :  ",house.toString());
@@ -181,7 +189,9 @@ public class ScratchService {
         //phase of purge orphans (when search idalista has been ended, also need to end in the local ddbb)
         for (House house : mHouses.values()){
             house.setEndDate(LocalDate.now());
-            houseRepository.save(house);
+            house = houseRepository.save(house);
+            houseSearchRepository.save(house);
+
             stats.houseEnded++;
 
             log.info("House ended {}-{} with price: :  ", house.getId(), house.getTitle(), house.getPrice());
