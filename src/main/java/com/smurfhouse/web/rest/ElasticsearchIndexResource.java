@@ -30,10 +30,10 @@ public class ElasticsearchIndexResource {
     private ElasticsearchIndexService elasticsearchIndexService;
 
     /**
-     * POST  /elasticsearch/index -> Reindex all Elasticsearch documents
+     * GET  /elasticsearch/index -> Reindex all Elasticsearch documents
      */
     @RequestMapping(value = "/elasticsearch/index",
-        method = RequestMethod.POST,
+        method = RequestMethod.GET,
         produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
     @PreAuthorize("hasAuthority('" + AuthoritiesConstants.ADMIN + "')")
