@@ -24,17 +24,35 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="inputPrice">Precio</label> {{vm.sliderPrice.value[0] | currency:"€":0}} - {{vm.sliderPrice.value[1] | currency:"€":0}}
-                                <slider ng-model="vm.sliderPrice.value" value="vm.sliderPrice.value" min="vm.sliderPrice.min" max="vm.sliderPrice.max" step="vm.sliderPrice.step" range="true"></slider>
+                                <label for="inputPrice">Precio</label> {{vm.sliderPriceFrom | currency:"€":0}} - {{vm.sliderPriceTo | currency:"€":0}}
+
+                                <p class="input-group">
+                                    <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.from">from</span>
+                                    <input type="number" class="input-sm form-control" name="from" ng-model="vm.sliderPriceFrom"/>
+                                    <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.to">to</span>
+                                    <input type="number" class="input-sm form-control" name="to" ng-model="vm.sliderPriceTo"/>
+                                </p>
+                                
                             </div>
 
                             <div class="form-group">
-                                <label for="inputMeters">Metros</label> {{ vm.sliderMeters.value[0] }} m2 - {{ vm.sliderMeters.value[1] }} m2
-                                <slider ng-model="vm.sliderMeters.value" value="vm.sliderMeters.value" min="vm.sliderMeters.min" max="vm.sliderMeters.max" step="vm.sliderMeters.step" range="true"></slider>
+                                <label for="inputMeters">Metros</label> {{ vm.sliderMetersFrom}} m2 - {{ vm.sliderMetersTo }} m2
+                                <p class="input-group">
+                                    <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.from">from</span>
+                                    <input type="number" class="input-sm form-control" name="from" ng-model="vm.sliderMetersFrom"/>
+                                    <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.to">to</span>
+                                    <input type="number" class="input-sm form-control" name="to" ng-model="vm.sliderMetersTo"/>
+                                </p>
                             </div>
                             <div class="form-group">
-                                <label for="inputFloor">Planta</label> {{ vm.sliderFloor.value[0] }} - {{ vm.sliderFloor.value[1]}}
-                                <slider ng-model="vm.sliderFloor.value" value="vm.sliderFloor.value" min="vm.sliderFloor.min" max="vm.sliderFloor.max" step="vm.sliderFloor.step" range="true"></slider>
+                                <label for="inputFloor">Planta</label> {{ vm.sliderFloorFrom }} - {{ vm.sliderFloorTo}}
+                                <p class="input-group">
+                                    <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.from">from</span>
+                                    <input type="number" class="input-sm form-control" name="from" ng-model="vm.sliderFloorFrom"/>
+                                    <span class="input-group-addon" translate="smurfHouseApp.dashboards.updates.filter.to">to</span>
+                                    <input type="number" class="input-sm form-control" name="to" ng-model="vm.sliderFloorTo"/>
+                                </p>
+
                             </div>
                         </form>
                         <form class="form-inline">

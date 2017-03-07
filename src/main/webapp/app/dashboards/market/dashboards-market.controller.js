@@ -38,24 +38,15 @@
         vm.garage = false;
         vm.elevator = false;
         vm.facingOutside = true;
-        vm.sliderPrice = {};
-        vm.sliderPrice.value = [10000,200000];
-        vm.sliderPrice.min = 10000;
-        vm.sliderPrice.max = 300000;
-        vm.sliderPrice.step = 10000;
 
-        vm.sliderMeters = {};
-        vm.sliderMeters.value = [10,200];
-        vm.sliderMeters.min = 10;
-        vm.sliderMeters.max = 200;
-        vm.sliderMeters.step = 10;
+        vm.sliderPriceFrom = 10000;
+        vm.sliderPriceTo = 200000;
 
-        vm.sliderFloor = {};
-        vm.sliderFloor.value = [1,10];
-        vm.sliderFloor.min = 0;
-        vm.sliderFloor.max = 10;
-        vm.sliderFloor.step = 1;
+        vm.sliderMetersFrom = 10;
+        vm.sliderMetersTo= 200;
 
+        vm.sliderFloorFrom = 0;
+        vm.sliderFloorTo = 10;
 
         vm.options = {
             chart: {
@@ -202,9 +193,9 @@
             criteria = addExistCriteriaBoolean (vm.elevator, "elevator", criteria);
             criteria = addExistCriteriaBoolean (vm.garage, "garage", criteria);
             criteria = addExistCriteriaBoolean (vm.facingOutside, "facingOutside", criteria);
-            criteria = addRangeNumericCriteria (vm.sliderPrice.value[0], vm.sliderPrice.value[1], "price" , criteria);
-            criteria = addRangeNumericCriteria (vm.sliderMeters.value[0], vm.sliderMeters.value[1], "meters" , criteria);
-            criteria = addRangeNumericCriteria (vm.sliderFloor.value[0], vm.sliderFloor.value[1], "floor" , criteria);
+            criteria = addRangeNumericCriteria (vm.sliderPriceFrom, vm.sliderPriceTo, "price" , criteria);
+            criteria = addRangeNumericCriteria (vm.sliderMetersFrom, vm.sliderMetersTo, "meters" , criteria);
+            criteria = addRangeNumericCriteria (vm.sliderFloorFrom, vm.sliderFloorTo, "floor" , criteria);
             criteria = addMissingCriteriaBoolean (true, "endDate", criteria);
 
             console.log ("criteria " , criteria);

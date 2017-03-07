@@ -55,6 +55,7 @@ gulp.task('copy', function () {
             merge: true
         }))
         .pipe(gulp.dest(config.dist)),
+
         gulp.src(config.app + 'content/**/*.{woff,woff2,svg,ttf,eot,otf}')
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist + 'content/fonts/'))
@@ -69,13 +70,8 @@ gulp.task('copy', function () {
         gulp.src([config.app + 'robots.txt', config.app + 'favicon.ico', config.app + '.htaccess'], { dot: true })
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist))
-        .pipe(gulp.dest(config.dist)),
+        .pipe(gulp.dest(config.dist))
 
-        gulp.src(config.bower + 'font-awesome/fonts/*.*')
-            .pipe(plumber({errorHandler: handleErrors}))
-            //.pipe(changed(config.dist + 'content/fonts/'))
-            .pipe(gulp.dest(config.dist + 'content/fonts/'))
-            .pipe(debug())
     );
 });
 
