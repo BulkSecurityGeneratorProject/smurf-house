@@ -51,7 +51,7 @@ public class ScratchService {
     @Timed
     @Scheduled(cron = "0 0 22 * * ?")
     public void synchronizeAll () {
-
+        log.info(" ************ Starting synchronizeAll .. ***** ");
         StatsSincronyzeDTO totalStats = new StatsSincronyzeDTO ();
 
         List<GroupSearch> groupSearches = groupSearchRepository.findAllActivated();
@@ -63,7 +63,7 @@ public class ScratchService {
             totalStats.houseNewPrice += stats.houseNewPrice;
         }
 
-        log.info("synchronizeAll - total stats {} ", totalStats);
+        log.info("************ synchronizeAll - total stats {} ", totalStats);
     }
 
     @Timed
