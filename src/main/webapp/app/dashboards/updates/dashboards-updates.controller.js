@@ -63,7 +63,7 @@
             // Today + 1 day - needed if the current day must be included
             var today = new Date();
             vm.toDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-            vm.fromDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() );
+            vm.fromDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
         }
 
 

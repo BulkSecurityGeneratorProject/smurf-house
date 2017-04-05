@@ -16,6 +16,7 @@
             "detail": {
                 "title": "House"
             },
+            "title": "Title",
             "key": "Key",
             "externalLink": "External Link",
             "price": "Price",

@@ -2,7 +2,25 @@
     "smurfHouseApp": {
         "dashboards" : {
             "market": {
-                "title": "Dashboard Market"
+                "title": "Dashboard Market",
+                "selectgroupsearch" : "Select group of search",
+                "search": {
+                    "zone" : "Zone",
+                    "title": "Títle",
+                    "details": "Details",
+                    "price":"Price",
+                    "startDate":"StartDate",
+                    "updateDate":"UpdateDate",
+                    "priceMeter": "€/m2"
+                }
+            },
+            "updates" : {
+                "title" : "Updates",
+                "filter" : {
+                    "title" : "Filter by Date",
+                    "from" : "From",
+                    "to" : "To"
+                }
             },
             "house": "House"
         }
