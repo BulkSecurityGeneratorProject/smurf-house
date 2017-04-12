@@ -34,6 +34,8 @@ public class IdealistaScratchTest {
         assertNotNull(pargeParsed.getHousesCurrentPage());
         assertTrue(pargeParsed.getHousesCurrentPage().size() == 1);
         assertEquals(pargeParsed.getHousesCurrentPage().get(0).getDetails() , "5 hab. 247 m² 2ª planta exterior con ascensor");
+        assertNotNull(pargeParsed.getHousesCurrentPage().get(0).getHash() );
+
 
     }
 

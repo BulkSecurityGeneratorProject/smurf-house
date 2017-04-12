@@ -16,6 +16,7 @@ public class ScratchHouse {
     private Boolean hasElevator;
     private Boolean hasGarage;
     private Boolean facingOutside;
+    private String hash;
 
     public Boolean getHasGarage() {
         return hasGarage;
@@ -109,6 +110,14 @@ public class ScratchHouse {
         this.floor = floor;
     }
 
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
     @Override
     public String toString() {
         return "id: " + id +
@@ -121,7 +130,8 @@ public class ScratchHouse {
                 ", facingOutside: " + facingOutside +
                 ", hasGarage: " + hasGarage +
                 ", url: " + url +
-                ", details: " + details;
+                ", details: " + details +
+                ", hash: " + hash;
     }
 
 

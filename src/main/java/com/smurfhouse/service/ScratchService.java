@@ -124,7 +124,7 @@ public class ScratchService {
 
         for (ScratchHouse scratchHouse : scratchHouses) {
 
-            String key = generateKey(scratchHouse);
+            String key = scratchHouse.getHash();
             log.info("Checking scratchHouse : {} - {}. Key: {}", scratchHouse.getTitle() , scratchHouse.getDetails() , key);
 
             if (mHouses.containsKey(key)) {
@@ -245,17 +245,6 @@ public class ScratchService {
         return house;
     }
 
-    private String generateKey (ScratchHouse scratchHouse) {
-        StringJoiner sj = new StringJoiner(":");
-        sj.add(scratchHouse.getTitle());
-        sj.add(String.valueOf(scratchHouse.getFacingOutside()));
-        sj.add(String.valueOf(scratchHouse.getFloor()));
-        sj.add(String.valueOf(scratchHouse.getHasElevator()));
-        sj.add(String.valueOf(scratchHouse.getHasGarage()));
-        sj.add(String.valueOf(scratchHouse.getMeters()));
-        sj.add(String.valueOf(scratchHouse.getNumberRooms()));
 
-        return sj.toString();
-    }
 
 }

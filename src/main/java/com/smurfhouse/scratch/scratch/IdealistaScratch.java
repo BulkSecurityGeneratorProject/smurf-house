@@ -2,6 +2,7 @@ package com.smurfhouse.scratch.scratch;
 
 import com.smurfhouse.scratch.model.PageParsed;
 import com.smurfhouse.scratch.model.ScratchHouse;
+import com.smurfhouse.scratch.util.UtilScratch;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -104,6 +105,12 @@ public class IdealistaScratch {
                     return text;
                 })
                 .collect(Collectors.joining(" ")));
+
+
+        String description =findTextElementSafeNullPointer(element, ".item-description");
+        String key =  UtilScratch.bytesToHex (UtilScratch.generateHash(house.getDetails() + description));
+        house.setHash(key);
+
 
         StringBuilder stringOrder = new StringBuilder();
         stringOrder.append("/con-metros-cuadrados-mas-de_");

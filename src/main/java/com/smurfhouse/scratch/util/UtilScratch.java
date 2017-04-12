@@ -8,6 +8,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.math.BigDecimal;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
@@ -20,6 +22,17 @@ import java.util.regex.Pattern;
  */
 public class UtilScratch {
 
+    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+
+    public static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for ( int j = 0; j < bytes.length; j++ ) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
+    }
 
     public static WebClient getNewWebClient () {
 
@@ -42,6 +55,19 @@ public class UtilScratch {
 
         return webClient;
     }
+
+    public static byte[] generateHash(String stringToEncrypt) {
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(stringToEncrypt.getBytes());
+            return messageDigest.digest();
+
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+    }
+
 
 
     public static String findTextElementSafeNullPointer (Element e, String selector) {
