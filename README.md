@@ -16,15 +16,18 @@ using JHipster, you can find documentation and help at [https://jhipster.github.
 
 
 ##Define group of search
+
 Basically, this correspend how is set up the url to do the scratch. 
 ![SetUp Group Search](doc/SetupGroupSearch.png)
 
 ##Dashboard Updates
+
 Simple screen to can filter by from/to date to can see the sumaration of the house news, updades or ended. 
 Click in see, you can see the details
 ![dashboard updates](doc/dashboard-updates.png)
 
 ##Dashboard Market
+
 In this screen, you can see the initial critera. Zona is a multiselect combobox
 ![dashboard market](doc/dashboard-market.png)
 
